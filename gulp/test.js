@@ -1,6 +1,6 @@
 import gulp from 'gulp';
 import mocha from 'gulp-mocha';
-
+import { rollupForTest } from './lib';
 const mochaGlobals = ['stub', 'spy', 'expect', 'Mn'];
 
 function _mocha(setupFile) {
@@ -13,15 +13,24 @@ function _mocha(setupFile) {
 			reporter: 'dot',
 			globals: mochaGlobals,
 			ignoreLeaks: false,
-			//compilers:'js:babel-core/register',
-			require:'babel-core/register'
+			//compilers: 'js:babel-register'
+			// compilers:'js:babel-core/register',
+			require:'babel-register'
 		}));
 }
 
 
 function test() {
-	
-	return _mocha('test/setup/node.js');
+	process.env.NODE_ENV = 'test';
+	// require('babel-register')({
+	// 	test: /node_modules/,
+	// });
+	return _mocha('test/setup.js');
 }
 
-gulp.task('test', test);
+const babelcfg = {
+	include:['node_modules/bbmn-core']
+}
+
+gulp.task('rollup-test', () => rollupForTest('es'));
+gulp.task('test', ['rollup-test'], test);

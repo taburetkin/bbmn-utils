@@ -13,6 +13,7 @@ export { default as getOption } from './get-option/index.js';
 export { default as hasFlag } from './has-flag/index.js';
 export { default as getFlag } from './get-flag/index.js';
 export { default as isKnownCtor } from './is-known-ctor/index.js';
+export { default as knownCtors } from './is-known-ctor/ctors.js';
 
 export { default as mix } from './mix/index.js';
 export { default as paramsToObject } from './params-to-object/index.js';

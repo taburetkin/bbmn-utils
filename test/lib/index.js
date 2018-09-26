@@ -1,7 +1,41 @@
-import { BackboneView, BaseClass, Collection, MnObject, Model, Region, Router, extend, isModel, isView, isViewClass } from 'bbmn-core';
-import Mn from 'backbone.marionette';
+import Mn, { Region } from 'backbone.marionette';
+import { Collection, Model, Router, View as View$1 } from 'backbone';
 
-var ctors = _.reduce([Model, Collection, BackboneView, Router, MnObject, Region, BaseClass], function (ctors, ctor) {
+var MnObject = Mn.Object || Mn.MnObject;
+
+function isClass(arg, Base) {
+	return _.isFunction(arg) && (arg == Base || arg.prototype instanceof Base);
+}
+
+function isModel(arg) {
+	return arg instanceof Model;
+}
+
+function isModelClass(arg) {
+	return isClass(arg, Model);
+}
+
+function isCollection(arg) {
+	return arg instanceof Collection;
+}
+function isCollectionClass(arg) {
+	return isClass(arg, Collection);
+}
+
+function isView(arg) {
+	return arg instanceof View$1;
+}
+
+function isViewClass(arg) {
+	return isClass(arg, View);
+}
+
+var extend = Model.extend;
+
+var BaseClass = function BaseClass() {};
+BaseClass.extend = extend;
+
+var ctors = _.reduce([Model, Collection, View$1, Router, MnObject, Region, BaseClass], function (ctors, ctor) {
 	if (_.isFunction(ctor)) {
 		ctors.push(ctor);
 	}
@@ -1067,7 +1101,6 @@ function mergeObject(src, dst) {
 	return unFlat(flatSrc);
 }
 
-export { betterResult, camelCase, takeFirst, comparator, compareAB, convertString, extend, flattenObject as flat, getByPath, getOption, hasFlag, getFlag, isKnownCtor, ctors as knownCtors, mix, paramsToObject, setByPath, convertToBoolean as toBool, unFlat as unflat, compareObjects, mergeObject as mergeObjects, triggerMethod, triggerMethodOn, mergeOptions, buildViewByKey, index as enums, skipTake };
-export { isClass, isModel, isModelClass, isCollection, isCollectionClass, isView, isViewClass } from 'bbmn-core';
+export { betterResult, camelCase, takeFirst, comparator, compareAB, convertString, extend, flattenObject as flat, getByPath, getOption, hasFlag, getFlag, isKnownCtor, ctors as knownCtors, mix, paramsToObject, setByPath, convertToBoolean as toBool, unFlat as unflat, compareObjects, mergeObject as mergeObjects, triggerMethod, triggerMethodOn, mergeOptions, buildViewByKey, index as enums, skipTake, isClass, isModel, isModelClass, isCollection, isCollectionClass, isView, isViewClass };
 
 //# sourceMappingURL=index.js.map

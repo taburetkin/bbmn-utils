@@ -7,6 +7,7 @@ const ctors = _.reduce([
 	if(_.isFunction(ctor)){
 		ctors.push(ctor);
 	}
+	return ctors;
 }, []);
 
 

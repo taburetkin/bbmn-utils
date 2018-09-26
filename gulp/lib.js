@@ -16,25 +16,30 @@ let rollupGlobals = {
 	'backbone.marionette': 'Mn',
 	'jquery': '$',
 	'underscore': '_',
-	'bbmn-extend': 'bbmn'
+	'bbmn-core': 'bbmn'
 };
 
-let getRollupConfig = (format) => ({
-	allowRealFiles: true,
-	plugins: [
-		resolve({
-			module: true,
-		}),
-		babel(babelConfig)
-	],
-	external: ['backbone', 'backbone.marionette', 'underscore', 'bbmn-extend'],
-	output: {
-		format,
-		name: 'MnControls',
-		'globals': rollupGlobals
-	},
-	input:'src/index.js'
-});
+let testExternals = ['backbone', 'backbone.marionette', 'underscore'];
+
+let getRollupConfig = (format, babelcfg = babelConfig) => {
+
+	return {
+		allowRealFiles: true,
+		plugins: [
+			resolve({
+				module: true,
+			}),
+			babel(babelcfg)
+		],
+		external: ['backbone', 'backbone.marionette', 'underscore', "bbmn-core"],
+		output: {
+			format,
+			name: 'bbmn.utils',
+			'globals': rollupGlobals
+		},
+		input:'src/index.js'
+	}
+};
 
 function lib(format) {
 	let rollupConfig = getRollupConfig(format);
@@ -47,6 +52,22 @@ function lib(format) {
 		.pipe(size())
 		.pipe(gulp.dest('lib/' + format));
 }
+
+export function rollupForTest(name)
+{
+	let rollupConfig = getRollupConfig(name);
+	rollupConfig.external = testExternals;
+	gulp.src('src/index.js')
+		.pipe(sourcemaps.init())
+		// note that UMD and IIFE format requires `name` but it will be inferred from the source file name `mylibrary.js`
+		.pipe(rollup(rollupConfig))
+		// save sourcemap as separate file (in the same folder)
+		.pipe(sourcemaps.write(''))
+		.pipe(size())
+		.pipe(gulp.dest('test/lib'));
+
+}
+
 
 gulp.task('lib-iife', () => lib('iife'));
 gulp.task('lib-umd', ['lib-iife'], () => lib('umd'));
