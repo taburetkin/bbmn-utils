@@ -2,7 +2,7 @@
 import '../setup.js';
 import { betterResult as result } from '../../src/index.js';
 
-describe('utils • better-result',function(){
+describe('better-result: ',function(){
 	let testFunc = () => 'from function';
 	let testContext = function(){ return this.name };
 	let checkAlso = {
@@ -24,8 +24,12 @@ describe('utils • better-result',function(){
 		expect(result(obj,'foo')).to.equal('bar')
 	});
 
-	it('should return function value',() => {
+	it('should return function value if force is not set',() => {
 		expect(result(obj,'bar')).to.equal('from function')
+	});
+
+	it('should return function value if force is true',() => {
+		expect(result(obj,'bar', { force: true })).to.equal('from function')
 	});
 
 	it('should return function if force set to false',() => {
@@ -49,5 +53,9 @@ describe('utils • better-result',function(){
 		expect(result(obj,'argumentCount',{args:['','','','']})).to.equal(4);
 		expect(result(obj,'argumentValue',{args:['argument']})).to.equal('argument');
 	});		
+
+	it('should return undefined if key is not a string or an empty string', function(){
+		expect(result(obj, undefined)).to.be.undefined;
+	});
 
 });

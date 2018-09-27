@@ -1,6 +1,6 @@
 import gulp from 'gulp';
 import mocha from 'gulp-mocha';
-
+import registerBabel from './register-babel';
 const mochaGlobals = ['stub', 'spy', 'expect', 'Mn'];
 
 function _mocha(setupFile) {
@@ -16,11 +16,9 @@ function _mocha(setupFile) {
 }
 
 
-function test() {
+export function test() {
 	process.env.NODE_ENV = 'test';
-	require("babel-register")({
-		ignore: /node_modules\/(?!bbmn)/
-	});
+	registerBabel();
 	return _mocha('test/setup.js');
 }
 
