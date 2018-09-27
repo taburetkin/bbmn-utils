@@ -2,8 +2,8 @@ import '../setup';
 // import setByPath from '../../../src/utils/set-by-path';
 // import { Model } from '../../../src/vendors/backbone.js';
 
-import { setByPath } from '../lib';
-import { Model } from 'backbone';
+import { setByPath } from '../../src/index.js';
+import { Model } from 'bbmn-core';
 
 describe('utils • set-by-path',function(){
 	

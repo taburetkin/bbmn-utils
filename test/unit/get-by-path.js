@@ -1,5 +1,5 @@
 import '../setup';
-import { getByPath } from '../lib';
+import { getByPath } from '../../src/index.js';
 
 describe('utils • get-by-path',function(){
 	

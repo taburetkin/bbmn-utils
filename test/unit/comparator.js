@@ -1,8 +1,7 @@
 import '../setup';
-// import { comparator } from '../../../src/utils/index.js';
-// import { Model } from '../../../src/vendors/backbone.js';
-import { comparator } from '../lib';
-import { Model } from 'backbone'
+import { comparator } from '../../src/index.js';
+import { Model } from 'bbmn-core';
+
 
 
 describe('utils • comparator',function(){

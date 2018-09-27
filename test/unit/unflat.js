@@ -1,6 +1,5 @@
 import '../setup';
-//import unflat from '../../../src/utils/unflat';
-import { unflat } from '../lib';
+import { unflat } from '../../src/index.js';
 
 describe('utils • unflat',function(){
 	let testArr = [1,2,3];
@@ -8,9 +7,6 @@ describe('utils • unflat',function(){
 		"foo.bar.baz": "hello",
 		"foo.qwe": testArr
 	}
-	
-
-
 
 	it('should return undefined if passed argument is null or not an object', () => {
 		expect(unflat(123)).to.be.equal(undefined);

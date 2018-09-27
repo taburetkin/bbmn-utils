@@ -1,5 +1,5 @@
 import '../setup';
-import { buildViewByKey, isView } from '../lib';
+import { buildViewByKey, isView } from '../../src/index.js';
 
 describe('utils • build-view-by-key',function(){
 

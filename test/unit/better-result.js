@@ -1,6 +1,6 @@
 
 import '../setup.js';
-import { betterResult as result } from '../lib';
+import { betterResult as result } from '../../src/index.js';
 
 describe('utils • better-result',function(){
 	let testFunc = () => 'from function';

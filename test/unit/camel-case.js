@@ -1,5 +1,5 @@
 import '../setup';
-import { camelCase } from '../lib';
+import { camelCase } from '../../src/index.js';
 
 describe('utils • camel-case',function(){
 	describe('when passing one argument with optional last boolean', function(){

@@ -2,7 +2,7 @@ import '../setup';
 // import mix from '../../../src/utils/mix';
 // import extend from '../../../src/utils/extend';
 
-import { mix, extend } from '../lib';
+import { mix, extend } from '../../src/index.js';
 
 
 describe('utils • mix',function(){

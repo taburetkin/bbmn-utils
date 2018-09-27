@@ -1,6 +1,6 @@
 import '../setup';
 
-import { flat } from '../lib';
+import { flat } from '../../src/index.js';
 
 describe('utils • flat',function(){
 	let testArr = [1,2,3];

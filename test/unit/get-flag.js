@@ -1,5 +1,5 @@
 import '../setup';
-import { getFlag } from '../lib';
+import { getFlag } from '../../src/index.js';
 
 describe('utils • get-flag',function(){
 	describe('when check argument is not a string, array or object',function(){

@@ -2,8 +2,8 @@ import '../setup';
 // import compare from '../../../src/utils/compare-ab';
 // import { Model } from '../../../src/vendors/backbone.js';
 // import { View } from 'backbone.marionette';
-import { compareAB as compare } from '../lib';
-import { Model } from 'backbone'
+import { compareAB as compare } from '../../src/index.js';
+import { Model } from 'bbmn-core';
 import { View } from 'backbone.marionette'
 
 describe('utils • compare-ab',function(){

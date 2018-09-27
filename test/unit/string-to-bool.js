@@ -1,7 +1,7 @@
 import '../setup';
 //import bool from '../../../src/utils/to-bool';
 
-import { toBool as bool } from '../lib';
+import { toBool as bool } from '../../src/index.js';
 
 describe('utils • string-to-bool', function(){
 

@@ -3,8 +3,8 @@ import '../setup';
 // import ctors from '../../../src/utils/is-known-ctor/ctors';
 // import { Model } from '../../../src/vendors/backbone.js';
 
-import { isKnownCtor, knownCtors } from '../lib';
-import { Model } from 'backbone';
+import { isKnownCtor, knownCtors } from '../../src/index.js';
+import { Model } from 'bbmn-core';
 
 describe('utils • is-known-ctor',function(){
 	it('should return false if an argument is not one of known constructors',() => 

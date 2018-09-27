@@ -1,5 +1,5 @@
 import '../setup';
-import { hasFlag } from '../lib';
+import { hasFlag } from '../../src/index.js';
 
 describe('utils • has-flag',function(){
 	describe('when both is number',function(){
