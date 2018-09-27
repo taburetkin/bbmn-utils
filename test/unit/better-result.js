@@ -19,6 +19,9 @@ describe('better-result: ',function(){
 		argumentValue: a => a
 	}
 
+	it('should return undefined if object is undefined', function(){
+		expect(result(undefined,'foo')).to.be.undefined;
+	});
 
 	it('should return value by key in simple case',() => {
 		expect(result(obj,'foo')).to.equal('bar')
