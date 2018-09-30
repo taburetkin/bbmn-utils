@@ -1,15 +1,16 @@
 import '../setup';
 import { getFlag } from '../../src/index.js';
 
-describe('utils • get-flag',function(){
+describe('get-flag: ',function(){
 	describe('when check argument is not a string, array or object',function(){
 		it('should return undefined',function(){
-			expect(getFlag(5,2)).to.be.undefined;
-			expect(getFlag(null,2)).to.be.undefined;
-			expect(getFlag(undefined,2)).to.be.undefined;
+			expect(getFlag(5, 2)).to.be.undefined;
+			expect(getFlag(null, 2)).to.be.undefined;
+			expect(getFlag(undefined, 2)).to.be.undefined;
 		});
 	});	
 	describe('when check argument is a string',function(){
+
 		describe('and flag argument is a string',function(){
 			describe('and options are not set', function(){
 				it('should return given flag value',function(){
@@ -22,6 +23,14 @@ describe('utils • get-flag',function(){
 					expect(getFlag('asd','Asd, qwe')).to.be.equal('asd');
 					expect(getFlag('Asd','asd')).to.be.equal('Asd');
 				});
+				it('should return empty value if flag is empty', function(){
+					expect(getFlag('asd, qwe, Zxc','', { all: true })).to.be.undefined;
+				});
+				it('should return empty value if flag result to empty array', function(){
+					expect(getFlag('asd, qwe, Zxc', ',', { all: true })).to.be.undefined;
+				});
+
+
 			});
 			describe('and there is an options', function(){
 				it('should return founded value by given flag as string if returnAs options is set to "string"',function(){
@@ -40,9 +49,17 @@ describe('utils • get-flag',function(){
 				it('should return undefined if caseInsensitive options is set to false',function(){
 					expect(getFlag('asd','Asd', { caseInsensitive: false })).to.be.equal('');
 					expect(getFlag('Asd','asd', { caseInsensitive: false })).to.be.equal('');
-				});				
+				});
+				
+				it('should return empty string if flag is not contains all values and option all is set to true', function(){
+					expect(getFlag('asd, qwe, Zxc','Asd, qwe', { all: true })).to.be.undefined;
+				});
+				it('should return value if flag is contains all values and option all is set to true', function(){
+					expect(getFlag('asd, qwe, Zxc','Asd, qwe, zxc', { all: true })).to.be.equal('asd, qwe, Zxc');
+				});
 			});
-		});	
+		});
+
 		describe('and flag argument is an array',function(){
 			describe('and options are not set', function(){
 				it('should return given flag value as array',function(){
@@ -55,6 +72,9 @@ describe('utils • get-flag',function(){
 					expect(getFlag('asd',['Asd', 'qwe'])).to.be.eql(['asd']);
 					expect(getFlag('Asd',['asd'])).to.be.eql(['Asd']);
 				});
+				it('should return empty value if flag result to empty array', function(){
+					expect(getFlag('asd, qwe, Zxc', [], { all: true })).to.be.undefined;
+				});				
 			});
 			describe('and there is an options', function(){
 				
@@ -123,4 +143,46 @@ describe('utils • get-flag',function(){
 			expect(getFlag(check, 'two ,three', { returnAs:'object', takeObjectKeys: true })).to.be.eql({'duos':'Two', 'Tres':'three'});
 		});
 	});
+
+	it('should return undefined when returnAs options is set to something else', function(){
+		expect(getFlag('a,b,c','a', { returnAs: 'blablabla' })).to.be.undefined;
+	});
+	it('should return a when options is undefined', function(){
+		expect(getFlag('a,b,c','a', undefined)).to.be.equal('a');
+	});
+	// it('should return undefined', function(){
+	// 	expect(getFlag(undefined, undefined, undefined)).to.be.undefined;
+	// 	expect(getFlag(undefined, undefined, {delimeter: ','})).to.be.undefined;
+	// 	expect(getFlag()).to.be.undefined;
+	// });	
+
+	// it.only('',function(){
+	// 	getFlag(undefined, undefined, undefined);
+	// 	getFlag(undefined, undefined, {});
+	// 	getFlag(undefined, [], {});
+	// 	getFlag('undefined', {}, {});
+
+	// 	getFlag(undefined, 'a', {});
+	// 	getFlag(undefined, 'a', undefined);
+
+	// 	getFlag('undefined', undefined, {});
+	// 	getFlag('undefined', undefined, undefined);
+
+	// 	getFlag('undefined', 'a', {});
+	// 	getFlag('undefined', 'a', undefined);
+
+	// 	getFlag(['a','b'], ['a'], {all:true, returnAs:'object'});
+	// 	getFlag(['a','b'], 'a', {all:true, returnAs:'string'});
+
+
+	// 	getFlag('a,b');
+	// 	getFlag(undefined, 'a,b');
+	// 	getFlag('a,b','a',{});
+	// 	getFlag('a,b','a');
+	// 	getFlag('a,b',['a']);
+	// 	getFlag(['a','b'],['a'],{});
+	// 	getFlag({'a':'b'},['a']);
+	// 	expect(undefined).to.be.undefined;
+	// });
+
 });

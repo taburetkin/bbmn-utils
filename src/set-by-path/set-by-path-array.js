@@ -1,13 +1,8 @@
 import getProperty from '../get-by-path/get-property.js';
 import setProperty from './set-property.js';
-import ensureArguments from './ensure-arguments.js';
+
 import { isModel } from 'bbmn-core';
 export default function setByPathArr(context, propertyName, pathArray, value, options) {
-
-	let argumentsErrors = ensureArguments(context, propertyName);
-	if (argumentsErrors) {
-		return;
-	}
 
 	let modelContext;
 	if (isModel(context)) {
@@ -23,7 +18,9 @@ export default function setByPathArr(context, propertyName, pathArray, value, op
 
 		modelContext && options.models.push(modelContext);
 
-		return setProperty(context, propertyName, value, options);
+		return {			
+			value: setProperty(context, propertyName, value, options)
+		};
 
 	} else {
 
@@ -37,7 +34,8 @@ export default function setByPathArr(context, propertyName, pathArray, value, op
 
 		modelContext && options.models.push(modelContext);
 
-		var nextName = pathArray.shift();	
+		var nextName = pathArray.shift();
+
 		return setByPathArr(prop, nextName, pathArray, value, options);
 
 	}

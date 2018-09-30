@@ -4,6 +4,7 @@ import rollup from 'gulp-rollup';
 import babel from 'rollup-plugin-babel';
 import resolve from 'rollup-plugin-node-resolve';
 import size from 'gulp-size';
+import json from 'rollup-plugin-json';
 
 let babelConfig = {
 	presets: [['env', { modules: false }]],
@@ -26,6 +27,7 @@ let getRollupConfig = (format, babelcfg = babelConfig) => {
 	return {
 		allowRealFiles: true,
 		plugins: [
+			json(),
 			resolve({
 				module: true,
 			}),
@@ -35,7 +37,8 @@ let getRollupConfig = (format, babelcfg = babelConfig) => {
 		output: {
 			format,
 			name: 'bbmn.utils',
-			'globals': rollupGlobals
+			'globals': rollupGlobals,
+			exports: 'named',
 		},
 		input:'src/index.js'
 	}

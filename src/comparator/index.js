@@ -14,7 +14,9 @@ export default function comparator(...args){
 
 		_(args).every((single) => {
 
-			if(!_.isArray(single)) return true;
+			if (!_.isArray(single)) {
+				return true;
+			}
 			result = compareAB(...single);
 			return result === 0;
 		});

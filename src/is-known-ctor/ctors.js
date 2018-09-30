@@ -4,6 +4,7 @@ import Mn from 'backbone.marionette';
 const ctors = _.reduce([
 	Model, Collection, BackboneView, Router, MnObject, Region, BaseClass
 ], (ctors, ctor) => {
+	/* istanbul ignore next */
 	if(_.isFunction(ctor)){
 		ctors.push(ctor);
 	}

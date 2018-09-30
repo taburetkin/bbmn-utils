@@ -1,42 +1,116 @@
-export { default as betterResult } from './better-result/index.js';
-export { default as camelCase } from './camel-case/index.js';
-export { default as takeFirst } from './take-first/index.js';
+import { version as VERSION } from '../package.json';
 
-export { default as comparator } from './comparator/index.js';
-export { default as compareAB } from './compare-ab/index.js';
-export { default as convertString } from './convert-string/index.js';
-export { default as extend } from './extend/index.js';
+import betterResult from './better-result/index.js';
+import camelCase from './camel-case/index.js';
+import takeFirst from './take-first/index.js';
 
-export { default as flat } from './flat/index.js';
-export { default as getByPath } from './get-by-path/index.js';
-export { default as getOption } from './get-option/index.js';
-export { instanceGetOption } from './get-option/index.js';
-export { default as hasFlag } from './has-flag/index.js';
-export { default as getFlag } from './get-flag/index.js';
-export { default as isKnownCtor } from './is-known-ctor/index.js';
-export { default as knownCtors } from './is-known-ctor/ctors.js';
+import comparator from './comparator/index.js';
+import compareAB from './compare-ab/index.js';
+import convertString from './convert-string/index.js';
+import toNumber from './convert-string/to-number.js';
+import extend from './extend/index.js';
 
-export { default as mix } from './mix/index.js';
-export { default as paramsToObject } from './params-to-object/index.js';
-export { default as setByPath } from './set-by-path/index.js';
-export { default as toBool } from './to-bool/index.js';
-export { default as unflat } from './unflat/index.js';
+import flat from './flat/index.js';
+import getByPath from './get-by-path/index.js';
+import getOption from './get-option/index.js';
+import { instanceGetOption } from './get-option/index.js';
 
-export { default as compareObjects } from './compare-objects/index.js';
-export { default as mergeObjects } from './merge-objects/index.js';
-export { default as triggerMethod } from './trigger-method/index.js';
-export { default as triggerMethodOn } from './trigger-method-on/index.js';
+import { hasFlag, getFlag } from './flags/index.js';
 
-export { default as mergeOptions } from './merge-options/index.js';
+import isKnownCtor from './is-known-ctor/index.js';
+import knownCtors from './is-known-ctor/ctors.js';
 
-export { default as buildViewByKey } from './build-view-by-key/index.js';
+import isEmptyValue from './is-empty-value';
 
-export { default as enums } from './enums/index.js';
+import mix from './mix/index.js';
+import paramsToObject from './params-to-object/index.js';
+import setByPath from './set-by-path/index.js';
+import toBool from './to-bool/index.js';
+import unflat from './unflat/index.js';
 
-export { default as skipTake } from './skip-take/index.js';
+import compareObjects from './compare-objects/index.js';
+import mergeObjects from './merge-objects/index.js';
+import triggerMethod  from './trigger-method/index.js';
+import { triggerMethodOn } from './trigger-method/index.js';
+
+import mergeOptions from './merge-options/index.js';
+
+import buildViewByKey from './build-view-by-key/index.js';
+
+import enums, { enumsStore } from './enums/index.js';
+
+import skipTake from './skip-take/index.js';
 
 
-export { 
+import { 
 	isClass, isModel, isModelClass, isCollection, isCollectionClass, isView, isViewClass
 } from 'bbmn-core';
 
+
+export {
+	VERSION,
+	betterResult,
+	camelCase,
+	takeFirst,
+	comparator, 
+	compareAB,
+	convertString,
+	toNumber,
+	extend,
+	flat,
+	getByPath,
+	getOption,
+	instanceGetOption,
+	hasFlag, getFlag,
+	isKnownCtor,
+	knownCtors,
+	isEmptyValue,
+	mix,
+	paramsToObject,
+	setByPath,
+	toBool,
+	unflat,
+	compareObjects,
+	mergeObjects,
+	triggerMethod,
+	triggerMethodOn,
+	mergeOptions,
+	buildViewByKey,
+	enums, enumsStore,
+	skipTake,
+	isClass, isModel, isModelClass, isCollection, isCollectionClass, isView, isViewClass
+};
+
+export default {
+	VERSION,
+	betterResult,
+	camelCase,
+	takeFirst,
+	comparator, 
+	compareAB,
+	convertString,
+	toNumber,
+	extend,
+	flat,
+	getByPath,
+	getOption,
+	instanceGetOption,
+	hasFlag, getFlag,
+	isKnownCtor,
+	knownCtors,
+	isEmptyValue,
+	mix,
+	paramsToObject,
+	setByPath,
+	toBool,
+	unflat,
+	compareObjects,
+	mergeObjects,
+	triggerMethod,
+	triggerMethodOn,
+	mergeOptions,
+	buildViewByKey,
+	enums, enumsStore,
+	skipTake,
+	isClass, isModel, isModelClass, isCollection, isCollectionClass, isView, isViewClass
+};

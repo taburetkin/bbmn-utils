@@ -2,6 +2,12 @@
 import camelCase from '../camel-case/index.js';
 import getOption from '../get-option/index.js';
 
+export function triggerMethodOn(context, ...args) {
+	if(!_.isObject(context)) { return; }
+	
+	return triggerMethod.call(context, ...args);
+}
+
 export default function triggerMethod(event, ...args) {
 	// get the method name from the event name
 	const methodName = camelCase('on:' + event);

@@ -5,18 +5,24 @@ import '../setup';
 import { setByPath } from '../../src/index.js';
 import { Model } from 'bbmn-core';
 
-describe('utils • set-by-path',function(){
+describe('set-by-path: ',function(){
 	
+	// it('should return undefined if given arguments are incorrect', function(){
+
+	// });
+
 	it('should return given value in any case',() => {
 		expect(setByPath(null, 'path.path', 123)).to.equal(123);
+		expect(setByPath({}, '', 123)).to.equal(123);
+		expect(setByPath({}, 234, 123)).to.equal(123);
 		expect(setByPath({}, 'path.path', 321, {force:false})).to.equal(321);
-		expect(setByPath({}, 'path.path', 777, {force:false})).to.equal(777);
 	});
 
 	it('should respect force:false option',() => {
 		let test = {};
-		setByPath(test, 'path.path', 123, {force:false});
+		let result = setByPath(test, 'path.path', 123, {force:false});
 		expect(test.path).to.equal(undefined);
+		expect(result).to.be.equal(123);
 	});
 
 	it('should create objects by path',() => {

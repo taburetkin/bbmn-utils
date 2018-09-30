@@ -3,9 +3,13 @@ import '../setup';
 
 import { toBool as bool } from '../../src/index.js';
 
-describe('utils • string-to-bool', function(){
+describe('string-to-bool: ', function(){
 
-	describe('utils • string-to-bool: default', () => {
+	describe('default', () => {
+		it('should return boolean if passed argument is boolean', function(){
+			expect(bool(true)).to.be.true;
+			expect(bool(false)).to.be.false;
+		});
 		it('should return undefined if passed arg is null and nullable option is not set to false',() => {
 			expect(bool(null)).to.be.equal(undefined);
 		});

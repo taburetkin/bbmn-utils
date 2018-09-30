@@ -1,10 +1,10 @@
 export default function normalizeSetByPathOptions(opts = {}, ext)
 {
-
+	let { silent, force } = opts;
+	silent = silent === true;
+	force = force !== false;
 	let options = _.extend({}, opts, ext, {
-		silent: opts.silent === true,
-		force: opts.force !== false,
-		//passPath: [],
+		silent, force,
 		models: []
 	});
 

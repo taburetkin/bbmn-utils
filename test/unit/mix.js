@@ -5,8 +5,8 @@ import '../setup';
 import { mix, extend } from '../../src/index.js';
 
 
-describe('utils • mix',function(){
-	describe('	mix itself', () => {
+describe('mix: ',function(){
+	describe('mix object', () => {
 		it('should expose with', () => {
 			let test = mix({});
 			expect(test.with).to.be.a('function');
@@ -32,7 +32,7 @@ describe('utils • mix',function(){
 		});
 
 	});
-	describe('	with', () => {
+	describe('with', () => {
 		let MyClass = function(){};
 		MyClass.prototype.qwerty = 'qwerty';
 		MyClass.staticA = 'staticA';
@@ -47,6 +47,21 @@ describe('utils • mix',function(){
 			},
 			mixedA: 'mixedA'
 		}, { staticB: 'staticB' });
+
+		it('should throw error if mixed argument is not an object or function', function(){			
+			expect(mix).to.throw();
+			expect(mix.bind(null, 123)).to.throw();
+		});	
+
+		it('should return mixed if with arguments missing', function(){
+			let test = function(){};
+			expect(mix(test).with()).to.be.equal(test);
+		});
+
+		it('should return mixed if with arguments is not an object or function', function(){
+			let test = function(){};
+			expect(mix(test).with(1,2,3)).to.be.equal(test);
+		});		
 
 		it('should mix plain object', () => {
 			let Test = mix({}).with(A);

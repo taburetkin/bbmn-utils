@@ -18,7 +18,7 @@ function _mocha(setupFile) {
 
 export function test() {
 	process.env.NODE_ENV = 'test';
-	registerBabel();
+	//registerBabel();
 	return _mocha('test/setup.js');
 }
 

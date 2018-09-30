@@ -6,7 +6,7 @@ import { compareAB as compare } from '../../src/index.js';
 import { Model } from 'bbmn-core';
 import { View } from 'backbone.marionette'
 
-describe('utils • compare-ab',function(){
+describe('compare-ab',function(){
 	
 	it('should return 0 if no argument passed',() => {
 		expect(compare()).to.equal(0);

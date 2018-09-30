@@ -1,33 +1,51 @@
-function pstoSetPair(context, pair){
-	if(!_.isString(pair)) return;
+import isEmptyValue from '../is-empty-value/index.js';
+
+function pstoSetPair(context, pair, options){
+	if (!_.isString(pair) || pair === '') return;
+
 	let keyvalue = pair.split('=');
 	let key = keyvalue.shift();
 	let value = keyvalue.join('=');
-	pstoSetKeyValue(context, key, value);
+	pstoSetKeyValue(context, key, value, options);
 }
 
-function pstoSetKeyValue(context, key, value){
+function pstoSetKeyValue(context, key, value, options){
 		
-	if (key == null) return;
+	if (isEmptyValue(key) || isEmptyValue(value)) return;
+
 	key = decodeURIComponent(key);
-	value != null && (value = decodeURIComponent(value));
+	value = decodeURIComponent(value);
 
-	if(!(key in context))
-		return (context[key] = value);
+	let transform = options.transform;
+	if(_.isFunction(transform)) {
+		value = transform(key, value, options);
+	}
 
-	!_.isArray(context[key]) && (context[key] = [context[key]]);
+	if(!(key in context)) {
+		context[key] = value;
+		return value;
+	}
+
+	if (!_.isArray(context[key])) {
+		context[key] = [context[key]];
+	}
 
 	context[key].push(value);
 
 	return context[key];
 }
 
-export default function paramsToObject(raw, opts = {emptyObject: true}){
+export default function paramsToObject(raw, options = {}) {
+	let emptyObject = options.emptyObject !== false;
 	let result = {};
-	if(!_.isString(raw)) return opts.emptyObject ? result : raw;
+	if(!_.isString(raw)) return emptyObject ? result : raw;
 
 	let pairs = raw.split('&');
-	_(pairs).each((pair) => pstoSetPair(result, pair));
+	_(pairs).each((pair) => pstoSetPair(result, pair, options));
 	
+	if (!_.size(result) && !emptyObject) {
+		return raw;
+	}
+
 	return result;
 }

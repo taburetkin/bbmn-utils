@@ -23,8 +23,9 @@ export default function mix(_ctor, options) {
 		throw new Error('Mix argument should be a class or a plain object');
 	}
 
-	if (!_.isFunction(ctor.extend))
+	if (!_.isFunction(ctor.extend)) {
 		ctor.extend = extend;
+	}
 
 	return {
 		options: opts,

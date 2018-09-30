@@ -1,12 +1,12 @@
 import getOption from '../get-option/index.js';
 import { isView, isViewClass } from 'bbmn-core';
 
-export default function buildViewByKey(key, { TextView, options } = {}) {
+export default function buildViewByKey(context, key, { TextView, options } = {}) {
 	
 	if(!_.isString(key)) { return; }
 
-	let view = getOption(this, key, { args: [ this ] });
-	let _options = getOption(this, key + 'Options', { args: [ this ] });
+	let view = getOption(context, key, { args: [ context ] });
+	let _options = getOption(context, key + 'Options', { args: [ context ] });
 
 	if (TextView && _.isString(view)) {
 		_options = _.extend({}, _options, { text: view });

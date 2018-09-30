@@ -1,13 +1,16 @@
 import { flat, unflat } from '../index.js';
 
-export default function mergeObject(src, dst){
-	if (!_.isObject(src) || !_.isObject(dst)) {
-		return dst;
-	}
-	let flatSrc = flat(src);
-	let flatDst = flat(dst);
-	_.each(flatDst, (value, key) => {
-		flatSrc[key] = value;
-	});
-	return unflat(flatSrc);
+function norm(arg) {
+	return _.isObject(arg) ? arg : {};
+}
+
+export default function mergeObjects(...objects) {
+	
+	let flatted = _.reduce(objects, (dest, item) => {
+		_.extend(dest, flat(norm(item)));
+		return dest;
+	}, {});
+
+	return unflat(flatted);
+
 }

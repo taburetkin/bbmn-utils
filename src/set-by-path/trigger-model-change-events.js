@@ -1,4 +1,4 @@
-export default function triggerModelEventsOnSetByPath(value, options = {})
+export default function triggerModelEventsOnSetByPath(value, options)
 {
 	if (options.silent || !options.models.length) {
 		return;

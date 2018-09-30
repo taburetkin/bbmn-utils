@@ -34,8 +34,10 @@ global._ = _;
 global.$ = $;
 global.expect = global.chai.expect;
 
-
 beforeEach(function() {
 	this.sinon = global.sinon.createSandbox();
 });
 
+afterEach(function() {
+    this.sinon.restore();
+});

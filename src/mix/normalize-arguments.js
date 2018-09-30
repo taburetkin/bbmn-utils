@@ -1,7 +1,7 @@
 
 import createMixinFromObject from './create-mixin-from-object.js';
 
-export default function normalizeArguments(args, opts = {}) {
+export default function normalizeArguments(args, opts) {
 	let raw = {};
 	let wrap = opts.wrapObjectWithConstructor == true;
 	let merge = opts.mergeObjects == true;

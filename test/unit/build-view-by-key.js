@@ -18,23 +18,23 @@ describe('build-view-by-key',function(){
 	});
 
 	it('should return undefined if TextView not passed and value is a string', function(){
-		expect(buildViewByKey.call(context, 'text')).to.be.undefined;
+		expect(buildViewByKey(context, 'text')).to.be.undefined;
 	});
 
 	it('should return view if TextView is passed and value is a string', function(){
-		expect(buildViewByKey.call(context, 'text', { TextView: BackboneView })).to.be.instanceOf(BackboneView);
+		expect(buildViewByKey(context, 'text', { TextView: BackboneView })).to.be.instanceOf(BackboneView);
 	});	
 
 	it('should return view if TextView is passed and value is a string', function(){
-		expect(buildViewByKey.call(context, 'text', { TextView: BackboneView })).to.be.instanceOf(BackboneView);
+		expect(buildViewByKey(context, 'text', { TextView: BackboneView })).to.be.instanceOf(BackboneView);
 	});		
 
 	it('should return view if value is a view', function(){
-		expect(buildViewByKey.call(context, 'testView')).to.be.equal(testView);
+		expect(buildViewByKey(context, 'testView')).to.be.equal(testView);
 	});	
 
 	it('should return view if value is a viewClass and there is no options for view in context ', function(){
-		expect(buildViewByKey.call(context, 'testViewClass')).to.be.instanceOf(BackboneView);
+		expect(buildViewByKey(context, 'testViewClass')).to.be.instanceOf(BackboneView);
 	});	
 
 	describe('when ViewClass and ViewClassOptions supplied', function(){
@@ -51,7 +51,7 @@ describe('build-view-by-key',function(){
 			viewClass,
 			viewClassOptions
 		}
-		view = buildViewByKey.call(context, 'viewClass');
+		view = buildViewByKey(context, 'viewClass');
 
 		it('should return instance of context class', function(){
 			expect(view).to.be.instanceOf(BackboneView);
