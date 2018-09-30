@@ -1,8 +1,13 @@
 Acts almost as underscore [`_.result`](https://underscorejs.org/#result) but can invoke result function if its not one of well known constructors.  
+This function was implemented for better expirience with `backbone` and `backbone.marionette` instances. It helps handle complex options which can be a function and helps getting not yet initialized options values. see examples.
+
+```
+import { betterResult } from 'bbmn-utils';
+let result = betterResult( instance, 'propertyName', options);
+```
+
 > note:  
 third argument is NOT a default value. default value should be passed through options.
-
-This function was implemented for better expirience with `backbone` and `backbone.marionette` instances. It helps handle complex options which can be a function and helps getting not yet initialized options values. see examples.
 
 ### returns: 
 value of context's property
@@ -61,40 +66,5 @@ betterResult(context, 'bar', { args:['add this']});
 
 betterResult(context, 'baz', { args:['add this'], checkAlso });
 // returns: "ZZZ + add this"
-
-````
-
-### usage in a backbone or marionette instance
-There is a special mixin which utilizies this function and can be used for getting options or properties: [mixins/common/get-option](https://github.com/taburetkin/bbmn-extend/tree/master/src/mixins/common/get-option)
-
-getting not initialized option:
-````javascript
-const View = Marionette.View.extend({
-	constructor(options){
-
-		// at this point options is not yet initialized, 
-		// so you can not use getOption here, but you can do it like this
-		let value1 = betterResult(options, 'optionsValue', { checkAlso: this})
-
-		let value2 = betterResult(options, 'instanceValue', { checkAlso: this})
-
-		// with get-option mixin you can just use this.getOption() 
-		// for the same result. check mixin readme
-
-		console.log(value1);
-		console.log(value2);
-
-		Marionette.View.apply(this, arguments);
-		// at this ppoint options is initialized and getOption will work as intended
-	},
-	optionsValue: 'instace-foo',
-	instanceValue: 'instance-bar'
-});
-
-new View({ optionsValue: 'options-foo' })
-// console output:
-// options-foo
-// instance-bar
-
 
 ````
