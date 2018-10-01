@@ -1,5 +1,23 @@
 # table of contents
 
+* [isCollection](#isCollection) - returns `true` if argument is a `Backbone.Collection` instance.
+
+
+* [isCollectionClass](#isCollectionClass) - returns `true` if argument is a `Backbone.Collection` class.
+
+
+* [isModel](#isModel) - returns `true` if argument is a `Backbone.Model` instance.
+
+
+* [isModelClass](#isModelClass) - returns `true` if argument is a `Backbone.Model` class.
+
+
+* [isView](#isView) - returns `true` if argument is a `Backbone.View` instance
+
+
+* [isViewClass](#isViewClass) - returns `true` if argument is a `Backbone.View` class
+
+
 * [betterResult](#betterResult) - like underscore `_.result` but better
 
 
@@ -79,6 +97,36 @@
 
 
 * [unflat](#unflat) - Unflats given object. `{ 'a.b': 1 }` becames `{ a: { b: 1 } }`
+
+
+# isCollection
+
+returns `true` if argument is a `Backbone.Collection` instance.
+
+
+# isCollectionClass
+
+returns `true` if argument is a `Backbone.Collection` class.
+
+
+# isModel
+
+returns `true` if argument is a `Backbone.Model` instance.
+
+
+# isModelClass
+
+returns `true` if argument is a `Backbone.Model` class.
+
+
+# isView
+
+returns `true` if argument is a `Backbone.View` instance
+
+
+# isViewClass
+
+returns `true` if argument is a `Backbone.View` class
 
 
 # betterResult
@@ -585,6 +633,14 @@ sorry, there is no documentation yet :-(
 
 sorry, there is no documentation yet :-( 
 
+# triggerMethod
+
+sorry, there is no documentation yet :-( 
+
+# triggerMethodOn
+
+sorry, there is no documentation yet :-( 
+
 # toBool
 
 Tries to convert given value to boolean. 
@@ -634,14 +690,6 @@ toBool("",{returnEmptyAs: true}) -> true
 
 ````
 
-
-# triggerMethod
-
-sorry, there is no documentation yet :-( 
-
-# triggerMethodOn
-
-sorry, there is no documentation yet :-( 
 
 # unflat
 

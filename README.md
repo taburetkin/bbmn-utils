@@ -1,4 +1,25 @@
+# bbmn-utils
+is an utils pack
+
 # table of contents
+
+* [isCollection](#isCollection) - returns `true` if argument is a `Backbone.Collection` instance.
+
+
+* [isCollectionClass](#isCollectionClass) - returns `true` if argument is a `Backbone.Collection` class.
+
+
+* [isModel](#isModel) - returns `true` if argument is a `Backbone.Model` instance.
+
+
+* [isModelClass](#isModelClass) - returns `true` if argument is a `Backbone.Model` class.
+
+
+* [isView](#isView) - returns `true` if argument is a `Backbone.View` instance
+
+
+* [isViewClass](#isViewClass) - returns `true` if argument is a `Backbone.View` class
+
 
 * [betterResult](#betterResult) - like underscore `_.result` but better
 
@@ -81,6 +102,36 @@
 * [unflat](#unflat) - Unflats given object. `{ 'a.b': 1 }` becames `{ a: { b: 1 } }`
 
 
+# isCollection
+
+returns `true` if argument is a `Backbone.Collection` instance.
+
+
+# isCollectionClass
+
+returns `true` if argument is a `Backbone.Collection` class.
+
+
+# isModel
+
+returns `true` if argument is a `Backbone.Model` instance.
+
+
+# isModelClass
+
+returns `true` if argument is a `Backbone.Model` class.
+
+
+# isView
+
+returns `true` if argument is a `Backbone.View` instance
+
+
+# isViewClass
+
+returns `true` if argument is a `Backbone.View` class
+
+
 # betterResult
 
 Acts almost as underscore [`_.result`](https://underscorejs.org/#result) but can invoke result function if its not one of well known constructors.  
@@ -94,16 +145,15 @@ let result = betterResult( instance, 'propertyName', options);
 > note:  
 third argument is NOT a default value. default value should be passed through options.
 
-### returns: 
-value of context's property
-### arguments:
+### betterResult(context, key, options) 
+returns value from context by given key
 * **context**: object, required
 * **key**: string, required  
 * **options**: object, optional  
 
 ### options:
-* **force**: boolean, default: true 
-	> if **true** and returned **value is function** and it is not on e of well known constructor will return result of this function. if **false** will return value **as is**
+* **force**: boolean, default: `true` 
+	> If **true** and returned **value is function** and it is not one of well known constructor will return result of this function. If **false** will return value **as is**
 * **default**: any, default: not set
 	> if returned value is null or undefined will return default instead.
 * **context**: object, default: argument context
@@ -586,6 +636,14 @@ sorry, there is no documentation yet :-(
 
 sorry, there is no documentation yet :-( 
 
+# triggerMethod
+
+sorry, there is no documentation yet :-( 
+
+# triggerMethodOn
+
+sorry, there is no documentation yet :-( 
+
 # toBool
 
 Tries to convert given value to boolean. 
@@ -635,14 +693,6 @@ toBool("",{returnEmptyAs: true}) -> true
 
 ````
 
-
-# triggerMethod
-
-sorry, there is no documentation yet :-( 
-
-# triggerMethodOn
-
-sorry, there is no documentation yet :-( 
 
 # unflat
 

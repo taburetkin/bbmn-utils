@@ -1,5 +1,23 @@
 # table of contents
 
+* [isCollection](#isCollection) - returns `true` if argument is a `Backbone.Collection` instance.
+
+
+* [isCollectionClass](#isCollectionClass) - returns `true` if argument is a `Backbone.Collection` class.
+
+
+* [isModel](#isModel) - returns `true` if argument is a `Backbone.Model` instance.
+
+
+* [isModelClass](#isModelClass) - returns `true` if argument is a `Backbone.Model` class.
+
+
+* [isView](#isView) - returns `true` if argument is a `Backbone.View` instance
+
+
+* [isViewClass](#isViewClass) - returns `true` if argument is a `Backbone.View` class
+
+
 * [betterResult](#betterResult) - like underscore `_.result` but better
 
 
