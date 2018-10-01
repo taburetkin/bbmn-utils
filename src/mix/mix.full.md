@@ -70,8 +70,7 @@ this will create mixin for every argument will be applied to the base class in g
 
 ### usage:
 ````javascript
-import mix from 'bbmn-extend/src/utils/mix';
-import GetOptionMixin from 'bbmn-extend/src/mixins/common/get-option';
+import { mix } from 'bbmn-utils';
 import Mn from 'backbone.marionette';
 
 const MyFuncMixin = Base => Base.extend({
@@ -85,7 +84,7 @@ const MyPlainMixin = {
 	constB: 'bar',
 }
 
-const MixedView = mix(Mn.View).with(GetOptionMixin, MyFuncMixin, MyPlainMixin);
+const MixedView = mix(Mn.View).with(MyFuncMixin, MyPlainMixin);
 let result = new MixedView();
 
 ````

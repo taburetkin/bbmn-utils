@@ -1,5 +1,5 @@
 returns true if passed argument is a well known constructor.  
-in general was implemented for [utils/better-result](https://github.com/taburetkin/bbmn-extend/tree/master/src/utils/better-result) and [mixins/common/get-option](https://github.com/taburetkin/bbmn-extend/tree/master/src/mixins/common/get-option) mixin.
+in general was implemented for [better-result](#betterResult).
 
 ### returns: 
 `true` if a given argument is a well known constructor.  
@@ -14,24 +14,26 @@ By default it contains all backbone classes and marionette object class. You can
 
 ### examples:
 ```js
-import isKnownCtor from 'utils/is-known-ctor';
+import { isKnownCtor } from 'bbmn-utils';
 import { View } from 'backbone.marionette';
 
 let result = isKnownCtor(View); // true
 result = isKnownCtor(function(){}); // false
 
 ```
+## adding own ctor
+
 its possible to add your own classes to common array
 
 ```js
-import isKnownCtor from 'utils/is-known-ctor';
-import ctors from 'utils/is-known-ctor/ctors';
+import { isKnownCtor } from 'bbmn-utils';
+import { knownCtors } from 'bbmn-utils';
 
 const MyClass = function() {
 	//
 }
 
-ctors.push(MyClass);
+knownCtors.push(MyClass);
 
 let result = isKnownCtor(MyClass); // true
 

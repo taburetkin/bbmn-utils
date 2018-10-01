@@ -9,8 +9,8 @@ accepts 3 arguments and acts like `compareAB`:
 > comparator(A, B, getter | [getter, ..])
 
 or array :
-> comparator(array)  
-[ [A, B, getter | [getter, ..]], ... ]
+> comparator([A, B, getter], [A, B, getter], [A, B, getter])  
+
 
 ### examples:
 ````javascript
@@ -18,10 +18,10 @@ or array :
 compare(view1, view2, model => model.get('order'));
 //acts like compareAB
 
-compare([
+compare(
 	[view2, view1, model => model.get('order')], // by order desc
 	[view1, view2, model => model.get('name')], // then by name asc
-]);
+);
 
 
 ````

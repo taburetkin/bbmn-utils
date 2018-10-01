@@ -1,20 +1,88 @@
-## contents: 
-* [better-result](#better-result)
-* [build-view-by-key](#build-view-by-key)
-* [camel-case](#camel-case)
-* [comparator](#comparator)
-* [compare-ab](#compare-ab)
-* [flat](#flat)
-* [get-by-path](#get-by-path)
-* [is-known-ctor](#is-known-ctor)
-* [mix](#mix)
-* [set-by-path](#set-by-path)
-* [to-bool](#to-bool)
-* [unflat](#unflat)
+# table of contents
 
------
+* [betterResult](#betterResult) - like underscore `_.result` but better
 
-## better-result
+
+* [buildViewByKey](#buildViewByKey) - helps construct view by given key, automaticaly looks for supplied class and options
+
+
+* [camelCase](#camelCase) - converts `to:camel:case` string to `toCamelCase`
+
+
+* [comparator](#comparator) - helper for **array sort**, allow to construct complex multy field compare iteratees
+
+
+* [compareAB](#compareAB) - helper for array sort, simplifies comparing of backbone models and views.
+
+
+* [compareObjects](#compareObjects) - deeply compares two given objects, `[1,2, {a: 1}]` equals to `[2, {a:1}, 1]`
+
+
+* [convertString](#convertString) - converts argument to a given type: `convertString('yes','boolean')`. Supports out of the box **number** and **boolean**
+
+
+* [enums](#enums) - enums helpers. allow to store your enums, check if an enum has some flags or get their text label value.
+
+
+* [extend](#extend) - old good backbone `extend` method, for easy extending your definitions `MyClass.extend({ ... })`
+
+
+* [getFlag](#getFlag) - takes flags value from given enum. supports multiple variation of use. one of it: `getFlag({ 1:'one', 2:'two', 3:'three' }, '1, 3') - 'one, three'`
+
+
+* [hasFlag](#hasFlag) - checks if a given enum has given flags or no. 
+
+
+* [flat](#flat) - flattens given object. `{ a: {b: 1} }` becames `{ 'a.b':1 }`
+
+
+* [getByPath](#getByPath) - takes value from complex object by given path. Respects `Backbone.Model` attributes. `getByPath(someDeepObject, 'foo.bar.baz', options[optional])`
+
+
+* [getOption](#getOption) - like marionette's `getOption` but with some special abilities. 
+
+
+* [isEmptyValue](#isEmptyValue) - just checks argument for this `arg == null || arg === ''`
+
+
+* [isKnownCtor](#isKnownCtor) - Checks if an argument is one of known ctors. Known ctors array can be extended by your wish and by default contains all backbone and marionette classes.
+
+
+* [mergeObjects](#mergeObjects) - Deeply merges two or more objects. `mergeObjects({ a:{ b:1 } }, { b:0 })` result into `{ a: {b: 1}, b:0 }`
+
+
+* [mergeOptions](#mergeOptions) - like marionette's `mergeOptions` but can work with multiple arguments.
+
+
+* [mix](#mix) - helps to mixin definition. `let MyClass = mix(BaseClass).with(Mixin1, Mixin2, ...).extend({ ... })`
+
+
+* [paramsToObject](#paramsToObject) - converts parameters string to an object. `paramsToObject('foo=bar&baz=baz')` results into `{ foo:'bar', baz: 'baz' }`
+
+
+* [setByPath](#setByPath) - Sets value to a complex object by given path. Respects `Backbone.Model` and triggers change events if there are models on the way. `setByPath(myObject, 'foo.bar.baz', 'newvalue')`
+
+
+* [skipTake](#skipTake) - skips `x` items and takes `n` items from array. `skipTake(array, takeN, skipX)`
+
+
+* [takeFirst](#takeFirst) - Takes first founded value from given objects: `takeFirst('foo', options, this)`
+
+
+* [toBool](#toBool) - Converts argument to boolean. Supports options for describing convert behavior.
+
+
+* [triggerMethod](#triggerMethod) - Acts like marionette `triggerMethod`, also checks if an instance has `trigger` function.
+
+
+* [triggerMethodOn](#triggerMethodOn) - Acts like old marionette `triggerMethodOn`, internally uses [triggerMethod](#triggerMethod)
+
+
+* [unflat](#unflat) - Unflats given object. `{ 'a.b': 1 }` becames `{ a: { b: 1 } }`
+
+
+# betterResult
+
 Acts almost as underscore [`_.result`](https://underscorejs.org/#result) but can invoke result function if its not one of well known constructors.  
 This function was implemented for better expirience with `backbone` and `backbone.marionette` instances. It helps handle complex options which can be a function and helps getting not yet initialized options values. see examples.
 
@@ -86,7 +154,9 @@ betterResult(context, 'baz', { args:['add this'], checkAlso });
 
 ````
 
-## build-view-by-key
+
+# buildViewByKey
+
 Helps build view by key:
 ````
 import { View } from 'backbone.marionette';
@@ -101,24 +171,30 @@ let child = buildViewByKey(view, 'child');
 
 ````
 
-## camel-case
+
+# camelCase
+
 converts `:` separated string to `camelCase`.
-### returns: 
-string
-### arguments:
-* **text**: string, required
-* **affectFirstLetter**: boolean, optional  
-	> if true will capitalize first letter
+## camelCase(...args, boolean[optional])
+arguments should be a string and the last argument can be a bollean.
+
+returns camelCasedString.
+
+optional boolean indicates should it capitalize first letter or not.
+
 
 ### usage:
 ````javascript
 
-let result = camelCase('as:camel:case'); //  - "asCamelCase"
-result = camelCase('as:camel:case', true); // - "AsCamelCase"
+camelCase('as:camel:case'); //  - "asCamelCase"
+camelCase('as:camel:case', true); // - "AsCamelCase"
+camelCase('as', 'camel', 'case', true); // - "AsCamelCase"
 
 ````
 
-## comparator
+
+# comparator
+
 compares A and B.  
 difference from `compare-ab` is that you can pass multiple sets of compare operators.
 
@@ -130,8 +206,8 @@ accepts 3 arguments and acts like `compareAB`:
 > comparator(A, B, getter | [getter, ..])
 
 or array :
-> comparator(array)  
-[ [A, B, getter | [getter, ..]], ... ]
+> comparator([A, B, getter], [A, B, getter], [A, B, getter])  
+
 
 ### examples:
 ````javascript
@@ -139,18 +215,20 @@ or array :
 compare(view1, view2, model => model.get('order'));
 //acts like compareAB
 
-compare([
+compare(
 	[view2, view1, model => model.get('order')], // by order desc
 	[view1, view2, model => model.get('name')], // then by name asc
-]);
+);
 
 
 ````
 
-## compare-ab
+
+# compareAB
+
 compares a and b  
 was implemented for backbone.model or marionette.view comparison  
-used by [utils/comparator](https://github.com/taburetkin/bbmn-extend/tree/master/src/utils/comparator)
+
 ### returns: 
 -1 | 0 | 1
 > -1 if `a` less then `b`,  
@@ -196,7 +274,33 @@ compareAB(viewA, viewB, [(model,view) => view.order, model => model.get('order')
 
 ````
 
-## flat
+
+# compareObjects
+
+sorry, there is no documentation yet :-( 
+
+# convertString
+
+sorry, there is no documentation yet :-( 
+
+# enums
+
+sorry, there is no documentation yet :-( 
+
+# extend
+
+sorry, there is no documentation yet :-( 
+
+# getFlag
+
+sorry, there is no documentation yet :-( 
+
+# hasFlag
+
+sorry, there is no documentation yet :-( 
+
+# flat
+
 > flat(obj)
 
 Flattens given object
@@ -225,7 +329,9 @@ plain object
 
 ````
 
-## get-by-path
+
+# getByPath
+
 ### returns: 
 value from object by given path.
 
@@ -247,9 +353,19 @@ result = getByPath(myObject, 'foo.bar'); // - undefined
 
 ````
 
-## is-known-ctor
+
+# getOption
+
+sorry, there is no documentation yet :-( 
+
+# isEmptyValue
+
+sorry, there is no documentation yet :-( 
+
+# isKnowCtor
+
 returns true if passed argument is a well known constructor.  
-in general was implemented for [utils/better-result](https://github.com/taburetkin/bbmn-extend/tree/master/src/utils/better-result) and [mixins/common/get-option](https://github.com/taburetkin/bbmn-extend/tree/master/src/mixins/common/get-option) mixin.
+in general was implemented for [better-result](#betterResult).
 
 ### returns: 
 `true` if a given argument is a well known constructor.  
@@ -264,31 +380,39 @@ By default it contains all backbone classes and marionette object class. You can
 
 ### examples:
 ```js
-import isKnownCtor from 'utils/is-known-ctor';
+import { isKnownCtor } from 'bbmn-utils';
 import { View } from 'backbone.marionette';
 
 let result = isKnownCtor(View); // true
 result = isKnownCtor(function(){}); // false
 
 ```
+## adding own ctor
+
 its possible to add your own classes to common array
 
 ```js
-import isKnownCtor from 'utils/is-known-ctor';
-import ctors from 'utils/is-known-ctor/ctors';
+import { isKnownCtor } from 'bbmn-utils';
+import { knownCtors } from 'bbmn-utils';
 
 const MyClass = function() {
 	//
 }
 
-ctors.push(MyClass);
+knownCtors.push(MyClass);
 
 let result = isKnownCtor(MyClass); // true
 
 ```
 
 
-## mix
+
+# mergeObjects
+
+sorry, there is no documentation yet :-( 
+
+# mix
+
 helper for extending class or object with a given mixins.
 ### returns: 
 returns wrapper object: `{ with, options, class}`.
@@ -361,8 +485,7 @@ this will create mixin for every argument will be applied to the base class in g
 
 ### usage:
 ````javascript
-import mix from 'bbmn-extend/src/utils/mix';
-import GetOptionMixin from 'bbmn-extend/src/mixins/common/get-option';
+import { mix } from 'bbmn-utils';
 import Mn from 'backbone.marionette';
 
 const MyFuncMixin = Base => Base.extend({
@@ -376,12 +499,18 @@ const MyPlainMixin = {
 	constB: 'bar',
 }
 
-const MixedView = mix(Mn.View).with(GetOptionMixin, MyFuncMixin, MyPlainMixin);
+const MixedView = mix(Mn.View).with(MyFuncMixin, MyPlainMixin);
 let result = new MixedView();
 
 ````
 
-## set-by-path
+
+# paramsToObject
+
+sorry, there is no documentation yet :-( 
+
+# setByPath
+
 sets object value by path
 ### returns: 
 returns given value.
@@ -448,7 +577,17 @@ setByPath(model, 'nested.baz', 123);
 
 ````
 
-## to-bool
+
+# skipTake
+
+sorry, there is no documentation yet :-( 
+
+# takeFirst
+
+sorry, there is no documentation yet :-( 
+
+# toBool
+
 Tries to convert given value to boolean. 
 > toBool(undefined) -> undefined  
 toBool('false') -> false
@@ -496,7 +635,17 @@ toBool("",{returnEmptyAs: true}) -> true
 
 ````
 
-## unflat
+
+# triggerMethod
+
+sorry, there is no documentation yet :-( 
+
+# triggerMethodOn
+
+sorry, there is no documentation yet :-( 
+
+# unflat
+
 > unflat(obj)
 
 Unflattens given object
@@ -525,3 +674,4 @@ plain object
 	
 
 ````
+

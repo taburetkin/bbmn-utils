@@ -1,6 +1,6 @@
 compares a and b  
 was implemented for backbone.model or marionette.view comparison  
-used by [utils/comparator](https://github.com/taburetkin/bbmn-extend/tree/master/src/utils/comparator)
+
 ### returns: 
 -1 | 0 | 1
 > -1 if `a` less then `b`,  

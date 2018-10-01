@@ -9,16 +9,15 @@ let result = betterResult( instance, 'propertyName', options);
 > note:  
 third argument is NOT a default value. default value should be passed through options.
 
-### returns: 
-value of context's property
-### arguments:
+### betterResult(context, key, options) 
+returns value from context by given key
 * **context**: object, required
 * **key**: string, required  
 * **options**: object, optional  
 
 ### options:
-* **force**: boolean, default: true 
-	> if **true** and returned **value is function** and it is not on e of well known constructor will return result of this function. if **false** will return value **as is**
+* **force**: boolean, default: `true` 
+	> If **true** and returned **value is function** and it is not one of well known constructor will return result of this function. If **false** will return value **as is**
 * **default**: any, default: not set
 	> if returned value is null or undefined will return default instead.
 * **context**: object, default: argument context
