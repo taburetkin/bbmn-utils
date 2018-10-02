@@ -1,3 +1,5 @@
+> ### betterResult(context, key, options)
+
 Acts almost as underscore [`_.result`](https://underscorejs.org/#result) but can invoke result function if its not one of well known constructors.  
 This function was implemented for better expirience with `backbone` and `backbone.marionette` instances. It helps handle complex options which can be a function and helps getting not yet initialized options values. see examples.
 
@@ -9,13 +11,14 @@ let result = betterResult( instance, 'propertyName', options);
 > note:  
 third argument is NOT a default value. default value should be passed through options.
 
-### betterResult(context, key, options) 
-returns value from context by given key
+
+### returns: value from context by given key
+### arguments:
 * **context**: object, required
 * **key**: string, required  
 * **options**: object, optional  
 
-### options:
+### options argument:
 * **force**: boolean, default: `true` 
 	> If **true** and returned **value is function** and it is not one of well known constructor will return result of this function. If **false** will return value **as is**
 * **default**: any, default: not set

@@ -17,7 +17,7 @@ gulp.task('docs:table-contents', ['docs:clean'], function(){
 		process: function(src, filePath){
 			let name = getName(filePath);
 			let desc = src.length ? ' - ' + src : '';
-			let item = `* [${name}](#${name})` + desc + '\r\n';
+			let item = `* [${name}](#${name.toLowerCase()})` + desc + '\r\n';
 			return item;
 		}
 	}))
