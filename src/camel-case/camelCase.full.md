@@ -1,13 +1,16 @@
+> ### camelCase(...args, boolean[optional])
+
 converts `:` separated string to `camelCase`.
-## camelCase(...args, boolean[optional])
-arguments should be a string and the last argument can be a bollean.
 
-returns camelCasedString.
+### returns: camelCasedString
 
-optional boolean indicates should it capitalize first letter or not.
+### arguments
+each argument should be a string and the last one can be a bollean.
 
+### boolean argument
+If last argument is `true` then first letter became capitalized.
 
-### usage:
+### eamples:
 ````javascript
 
 camelCase('as:camel:case'); //  - "asCamelCase"

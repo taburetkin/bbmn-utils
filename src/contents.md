@@ -34,10 +34,10 @@
 * [compareAB](#compareab) - helper for array sort, simplifies comparing of backbone models and views.
 
 
-* [compareObjects](#compareobjects) - deeply compares two given objects, `[1,2, {a: 1}]` equals to `[2, {a:1}, 1]`
-
-
 * [convertString](#convertstring) - converts argument to a given type: `convertString('yes','boolean')`. Supports out of the box **number** and **boolean**
+
+
+* [compareObjects](#compareobjects) - deeply compares two given objects, `[1,2, {a: 1}]` equals to `[2, {a:1}, 1]`
 
 
 * [enums](#enums) - enums helpers. allow to store your enums, check if an enum has some flags or get their text label value.

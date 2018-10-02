@@ -34,10 +34,10 @@
 * [compareAB](#compareab) - helper for array sort, simplifies comparing of backbone models and views.
 
 
-* [compareObjects](#compareobjects) - deeply compares two given objects, `[1,2, {a: 1}]` equals to `[2, {a:1}, 1]`
-
-
 * [convertString](#convertstring) - converts argument to a given type: `convertString('yes','boolean')`. Supports out of the box **number** and **boolean**
+
+
+* [compareObjects](#compareobjects) - deeply compares two given objects, `[1,2, {a: 1}]` equals to `[2, {a:1}, 1]`
 
 
 * [enums](#enums) - enums helpers. allow to store your enums, check if an enum has some flags or get their text label value.
@@ -270,16 +270,19 @@ buildViewByKey(context, 'footer');
 
 # camelCase
 
+> ### camelCase(...args, boolean[optional])
+
 converts `:` separated string to `camelCase`.
-## camelCase(...args, boolean[optional])
-arguments should be a string and the last argument can be a bollean.
 
-returns camelCasedString.
+### returns: camelCasedString
 
-optional boolean indicates should it capitalize first letter or not.
+### arguments
+each argument should be a string and the last one can be a bollean.
 
+### boolean argument
+If last argument is `true` then first letter became capitalized.
 
-### usage:
+### eamples:
 ````javascript
 
 camelCase('as:camel:case'); //  - "asCamelCase"
