@@ -4,10 +4,10 @@ converts `:` separated string to `camelCase`.
 
 ### returns: camelCasedString
 
-### arguments
+### arguments:
 each argument should be a string and the last one can be a bollean.
 
-### boolean argument
+### boolean argument:
 If last argument is `true` then first letter became capitalized.
 
 ### eamples:
