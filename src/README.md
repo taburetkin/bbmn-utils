@@ -1,15 +1,7 @@
 # table of contents
 
 * [isCollection](#iscollection) - returns `true` if argument is a `Backbone.Collection` instance.
-### example:
-```js
-import { isCollection } from 'bbmn-utils';
 
-isCollection({}); //false
-
-isCollection(new Backbone.Collection()); //true
-
-```
 
 
 * [isCollectionClass](#iscollectionclass) - returns `true` if argument is a `Backbone.Collection` class.
@@ -110,31 +102,40 @@ isCollection(new Backbone.Collection()); //true
 
 # isCollection
 
+> ### isCollection(argument)
+
 returns `true` if argument is a `Backbone.Collection` instance.
+
+
 
 
 # isCollectionClass
 
+> ### isCollectionClass(argument)
 returns `true` if argument is a `Backbone.Collection` class.
 
 
 # isModel
 
+> ### isModel(argument)
 returns `true` if argument is a `Backbone.Model` instance.
 
 
 # isModelClass
 
+> ### isModelClass(argument)
 returns `true` if argument is a `Backbone.Model` class.
 
 
 # isView
 
+> ### isView(argument)
 returns `true` if argument is a `Backbone.View` instance
 
 
 # isViewClass
 
+> ### isViewClass(argument)
 returns `true` if argument is a `Backbone.View` class
 
 
