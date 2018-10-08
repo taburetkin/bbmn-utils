@@ -5,6 +5,7 @@ import babel from 'rollup-plugin-babel';
 import resolve from 'rollup-plugin-node-resolve';
 import size from 'gulp-size';
 import json from 'rollup-plugin-json';
+import addImport from './add-import';
 
 let babelConfig = {
 	presets: [['env', { modules: false }]],
@@ -28,6 +29,7 @@ let getRollupConfig = (format, babelcfg = babelConfig) => {
 		allowRealFiles: true,
 		plugins: [
 			json(),
+			//addImport(),
 			resolve({
 				module: true,
 			}),

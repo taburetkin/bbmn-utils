@@ -12,13 +12,14 @@ function _mocha(setupFile) {
 			reporter: 'dot',
 			globals: mochaGlobals,
 			ignoreLeaks: false,
+			//require: 'babel-register'
 		}));
 }
 
 
 export function test() {
 	process.env.NODE_ENV = 'test';
-	//registerBabel();
+	registerBabel();
 	return _mocha('test/setup.js');
 }
 

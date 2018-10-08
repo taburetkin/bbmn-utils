@@ -1,5 +1,5 @@
 export default function registerBabel() {
-	// require("babel-register")({
-	// 	ignore: /node_modules\/(?!bbmn)/
-	// });
+	require("babel-register")({
+		ignore: /node_modules\/(?!bbmn)/
+	});
 }
