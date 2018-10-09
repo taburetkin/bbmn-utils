@@ -29,7 +29,7 @@ let getRollupConfig = (format, babelcfg = babelConfig) => {
 		allowRealFiles: true,
 		plugins: [
 			json(),
-			//addImport(),
+			addImport(),
 			resolve({
 				module: true,
 			}),
