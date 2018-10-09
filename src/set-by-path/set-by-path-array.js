@@ -1,3 +1,4 @@
+import _ from 'underscore';
 import getProperty from '../get-by-path/get-property.js';
 import setProperty from './set-property.js';
 

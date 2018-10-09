@@ -1,3 +1,4 @@
+import _ from 'underscore';
 import { flat, unflat } from '../index.js';
 
 function norm(arg) {

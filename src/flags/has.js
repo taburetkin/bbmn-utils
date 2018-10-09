@@ -1,3 +1,4 @@
+import _ from 'underscore';
 import { searchFlags, normalizeValueAndFlag } from './helpers';
 
 

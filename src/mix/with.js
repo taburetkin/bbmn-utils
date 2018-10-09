@@ -1,3 +1,4 @@
+import _ from 'underscore';
 import normalizeArguments from './normalize-arguments.js';
 
 export default function withMethod(...args) {

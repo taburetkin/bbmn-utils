@@ -1,3 +1,4 @@
+import _ from 'underscore';
 export default function isEmptyValue(arg, { allowWhiteSpace = false } = {}) {
 
 	if (arg == null || _.isNaN(arg)) return true;

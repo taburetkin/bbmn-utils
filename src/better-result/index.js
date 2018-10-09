@@ -1,3 +1,4 @@
+import _ from 'underscore';
 import isKnownCtor from '../is-known-ctor/index.js';
 
 export default function betterResult(obj = {}, key, opts = {})

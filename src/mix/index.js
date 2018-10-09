@@ -1,3 +1,5 @@
+import _ from 'underscore';
+
 import defaultOptions from './options.js';
 import withMethod from './with.js';
 

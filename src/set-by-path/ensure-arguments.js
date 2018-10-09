@@ -1,3 +1,4 @@
+import _ from 'underscore';
 export default function ensureSetByPathArguments(context, path)
 {
 	let errors = [];

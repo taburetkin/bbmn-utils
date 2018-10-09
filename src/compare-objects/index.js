@@ -1,3 +1,4 @@
+import _ from 'underscore';
 
 function check(arg, opts) {
 	opts.ob += _.isObject(arg) && 1 || 0;

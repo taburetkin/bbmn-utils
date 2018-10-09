@@ -1,3 +1,4 @@
+import _ from 'underscore';
 import getOption from '../get-option/index.js';
 import { isView, isViewClass } from 'bbmn-core';
 

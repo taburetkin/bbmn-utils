@@ -1,3 +1,4 @@
+import _ from 'underscore';
 export default function createMixinFromObject(arg) {
 
 	let mixedObj = _.clone(arg);

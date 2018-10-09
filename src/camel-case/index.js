@@ -1,3 +1,4 @@
+import _ from 'underscore';
 // camelCase('asd:qwe:zxc') -> asdQweZxc
 // camelCase('asd:qwe:zxc', true) -> AsdQweZxc
 export default function camelCase(...args) {

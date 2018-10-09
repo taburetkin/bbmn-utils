@@ -1,3 +1,4 @@
+import _ from 'underscore';
 import compareAB from '../compare-ab/index.js';
 export default function comparator(...args){
 	var result = 0;

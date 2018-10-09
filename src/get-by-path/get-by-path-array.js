@@ -1,4 +1,4 @@
-
+import _ from 'underscore';
 import getProperty from './get-property.js';
 
 function getByPathArray(context, propertyName, pathArray) {

@@ -29,7 +29,7 @@ let getRollupConfig = (format, babelcfg = babelConfig) => {
 		allowRealFiles: true,
 		plugins: [
 			json(),
-			addImport(),
+			//addImport(),
 			resolve({
 				module: true,
 			}),
@@ -53,8 +53,8 @@ function lib(format) {
 		// note that UMD and IIFE format requires `name` but it will be inferred from the source file name `mylibrary.js`
 		.pipe(rollup(rollupConfig))
 		// save sourcemap as separate file (in the same folder)
+		.pipe(size({ title: format, showFiles: true}))
 		.pipe(sourcemaps.write(''))
-		.pipe(size())
 		.pipe(gulp.dest('lib/' + format));
 }
 

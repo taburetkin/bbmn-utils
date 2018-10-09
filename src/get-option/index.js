@@ -1,3 +1,4 @@
+import _ from 'underscore';
 import result from '../better-result/index.js';
 
 export default function getOption(context = {}, key, opts, also) {

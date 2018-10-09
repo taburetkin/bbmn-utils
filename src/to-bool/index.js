@@ -1,3 +1,4 @@
+import _ from 'underscore';
 import defaultOptions from './options.js';
 
 const trueValues = ['true','1','-1','yes'];

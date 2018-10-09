@@ -1,3 +1,4 @@
+import _ from 'underscore';
 export default function triggerModelEventsOnSetByPath(value, options)
 {
 	if (options.silent || !options.models.length) {

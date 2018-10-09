@@ -1,3 +1,4 @@
+import _ from 'underscore';
 import knownCtors from './ctors.js';
 
 function isKnownCtor(arg) {

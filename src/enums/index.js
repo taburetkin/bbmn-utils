@@ -1,5 +1,5 @@
-// import getFlag from '../get-flag/index.js';
-// import hasFlag from '../has-flag/index.js';
+import _ from 'underscore';
+
 import { getFlag, hasFlag } from '../flags/index.js';
 
 import getByPath from '../get-by-path/index.js';

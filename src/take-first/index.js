@@ -1,3 +1,4 @@
+import _ from 'underscore';
 export default function takeFirst(key, ...args) {
 	if(!_.isString(key) || key === '') return;
 	let value;

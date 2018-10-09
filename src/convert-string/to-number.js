@@ -1,3 +1,4 @@
+import _ from 'underscore';
 export default function toNumber(text){
 
 	if(_.isNumber(text) && !_.isNaN(text)) {

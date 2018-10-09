@@ -1,3 +1,5 @@
+import _ from 'underscore';
+
 export default function mergeOptions(options, ...keys) {
 	if (!_.isObject(options)) { return; }
   

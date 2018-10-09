@@ -1,4 +1,4 @@
-
+import _ from 'underscore';
 import getModel from './get-model.js';
 import getView from './get-view.js';
 export default function compareAB(a, b, func){

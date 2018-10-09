@@ -1,3 +1,4 @@
+import _ from 'underscore';
 export default function skipTake(array, take, skip = 0){
 	
 	if(!_.isObject(array)) { return; }	

@@ -1,3 +1,4 @@
+import _ from 'underscore';
 import { isModel } from 'bbmn-core';
 
 export const privateApi = { 

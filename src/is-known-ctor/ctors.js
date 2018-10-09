@@ -1,3 +1,4 @@
+import _ from 'underscore';
 import { Model, Collection, BackboneView, Router, MnObject, Region, BaseClass } from 'bbmn-core';
 import Mn from 'backbone.marionette';
 
