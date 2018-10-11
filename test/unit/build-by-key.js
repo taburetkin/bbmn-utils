@@ -64,6 +64,10 @@ describe('buildByKey: ', function(){
 			expect(getByKey(context, 'objKey')).to.be.a('object');
 		});
 
+		it('should return undefined if key is not found', function(){
+			expect(getByKey(context, 'some-not-exist-key')).to.be.undefined;
+		});		
+
 		it('should return object with filled `value` if keyValue is not a constructor', function(){
 			expect(getByKey(context, 'numKey')).to.be.a('object').that.has.property('value');
 			expect(getByKey(context, 'strKey')).to.be.a('object').that.has.property('value');

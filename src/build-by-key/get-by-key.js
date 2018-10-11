@@ -18,6 +18,9 @@ export default function getByKey(context, key, { ctor, checkCtor, options } = {}
 	if(!_.isString(key)) { return; }
 	
 	let instance = getOption(context, key, { force: false, args: [ context ] });
+	if (instance == null) {
+		return;
+	}
 	if (shouldInvoke(instance, ctor, checkCtor)) {
 		instance = instance.call(context, context);
 	}
