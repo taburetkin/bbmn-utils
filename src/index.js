@@ -36,15 +36,18 @@ import { triggerMethodOn } from './trigger-method/index.js';
 import mergeOptions from './merge-options/index.js';
 
 import buildViewByKey from './build-view-by-key/index.js';
+import buildByKey from './build-by-key/index.js';
 
 import enums, { enumsStore } from './enums/index.js';
 
 import skipTake from './skip-take/index.js';
 
+import renderInNode from './render-in-node/index.js';
 
 import { 
 	isClass, isModel, isModelClass, isCollection, isCollectionClass, isView, isViewClass
 } from 'bbmn-core';
+
 
 
 export {
@@ -75,9 +78,11 @@ export {
 	triggerMethod,
 	triggerMethodOn,
 	mergeOptions,
+	buildByKey,
 	buildViewByKey,
 	enums, enumsStore,
 	skipTake,
+	renderInNode,
 	isClass, isModel, isModelClass, isCollection, isCollectionClass, isView, isViewClass
 };
 
@@ -109,8 +114,10 @@ export default {
 	triggerMethod,
 	triggerMethodOn,
 	mergeOptions,
+	buildByKey,
 	buildViewByKey,
 	enums, enumsStore,
 	skipTake,
+	renderInNode,
 	isClass, isModel, isModelClass, isCollection, isCollectionClass, isView, isViewClass
 };

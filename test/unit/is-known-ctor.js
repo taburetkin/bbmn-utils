@@ -6,7 +6,13 @@ import '../setup';
 import { isKnownCtor, knownCtors } from '../../src/index.js';
 import { Model } from 'bbmn-core';
 
-describe('utils • is-known-ctor',function(){
+describe('isKnownCtor: ',function(){
+	it('should return false if argument is not a function', function(){
+		expect(isKnownCtor()).to.be.false;
+		expect(isKnownCtor(null)).to.be.false;
+		expect(isKnownCtor('foo')).to.be.false;
+		expect(isKnownCtor(123)).to.be.false;
+	});
 	it('should return false if an argument is not one of known constructors',() => 
 		expect(isKnownCtor(function(){})).to.equal(false)
 	);

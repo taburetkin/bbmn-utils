@@ -25,7 +25,10 @@ is an utils pack
 * [betterResult](#betterresult) - like underscore `_.result` but better
 
 
-* [buildViewByKey](#buildviewbykey) - helps construct view by given key, automaticaly looks for supplied class and options
+* [buildByKey](#buildbykey) - helps construct instance by given key, automaticaly looks for supplied class and options, for example `{ childView, childViewOptions }` where key is `childView`
+
+
+* [buildViewByKey](#buildviewbykey) - helps construct *view* by given key, automaticaly looks for supplied class and options internally uses `buildByKey`
 
 
 * [camelCase](#camelcase) - converts `to:camel:case` string to `toCamelCase`
@@ -37,10 +40,10 @@ is an utils pack
 * [compareAB](#compareab) - helper for array sort, simplifies comparing of backbone models and views.
 
 
-* [convertString](#convertstring) - converts argument to a given type: `convertString('yes','boolean')`. Supports out of the box **number** and **boolean**
-
-
 * [compareObjects](#compareobjects) - deeply compares two given objects, `[1,2, {a: 1}]` equals to `[2, {a:1}, 1]`
+
+
+* [convertString](#convertstring) - converts argument to a given type: `convertString('yes','boolean')`. Supports out of the box **number** and **boolean**
 
 
 * [enums](#enums) - enums helpers. allow to store your enums, check if an enum has some flags or get their text label value.
@@ -82,6 +85,9 @@ is an utils pack
 * [paramsToObject](#paramstoobject) - converts parameters string to an object. `paramsToObject('foo=bar&baz=baz')` results into `{ foo:'bar', baz: 'baz' }`
 
 
+* [renderInNode](#renderinnode) - renders a view in any dom element, usefull for opening modals and popovers
+
+
 * [setByPath](#setbypath) - Sets value to a complex object by given path. Respects `Backbone.Model` and triggers change events if there are models on the way. `setByPath(myObject, 'foo.bar.baz', 'newvalue')`
 
 
@@ -91,13 +97,13 @@ is an utils pack
 * [takeFirst](#takefirst) - Takes first founded value from given objects: `takeFirst('foo', options, this)`
 
 
-* [toBool](#tobool) - Converts argument to boolean. Supports options for describing convert behavior.
-
-
 * [triggerMethod](#triggermethod) - Acts like marionette `triggerMethod`, also checks if an instance has `trigger` function.
 
 
 * [triggerMethodOn](#triggermethodon) - Acts like old marionette `triggerMethodOn`, internally uses [triggerMethod](#triggerMethod)
+
+
+* [toBool](#tobool) - Converts argument to boolean. Supports options for describing convert behavior.
 
 
 * [unflat](#unflat) - Unflats given object. `{ 'a.b': 1 }` becames `{ a: { b: 1 } }`
@@ -271,30 +277,6 @@ buildViewByKey(context, 'footer');
 ```
 
 
-# camelCase
-
-> ### camelCase(...args, boolean[optional])
-
-converts `:` separated string to `camelCase`.
-
-### returns: camelCasedString
-
-### arguments
-each argument should be a string and the last one can be a bollean.
-
-### boolean argument
-If last argument is `true` then first letter became capitalized.
-
-### eamples:
-````javascript
-
-camelCase('as:camel:case'); //  - "asCamelCase"
-camelCase('as:camel:case', true); // - "AsCamelCase"
-camelCase('as', 'camel', 'case', true); // - "AsCamelCase"
-
-````
-
-
 # comparator
 
 compares A and B.  
@@ -377,15 +359,39 @@ compareAB(viewA, viewB, [(model,view) => view.order, model => model.get('order')
 ````
 
 
+# camelCase
+
+> ### camelCase(...args, boolean[optional])
+
+converts `:` separated string to `camelCase`.
+
+### returns: camelCasedString
+
+### arguments:
+each argument should be a string and the last one can be a bollean.
+
+### boolean argument:
+If last argument is `true` then first letter became capitalized.
+
+### eamples:
+````javascript
+
+camelCase('as:camel:case'); //  - "asCamelCase"
+camelCase('as:camel:case', true); // - "AsCamelCase"
+camelCase('as', 'camel', 'case', true); // - "AsCamelCase"
+
+````
+
+
 # compareObjects
 
 sorry, there is no documentation yet :-( 
 
-# convertString
+# enums
 
 sorry, there is no documentation yet :-( 
 
-# enums
+# convertString
 
 sorry, there is no documentation yet :-( 
 
@@ -432,6 +438,10 @@ plain object
 ````
 
 
+# getOption
+
+sorry, there is no documentation yet :-( 
+
 # getByPath
 
 ### returns: 
@@ -455,14 +465,6 @@ result = getByPath(myObject, 'foo.bar'); // - undefined
 
 ````
 
-
-# getOption
-
-sorry, there is no documentation yet :-( 
-
-# isEmptyValue
-
-sorry, there is no documentation yet :-( 
 
 # isKnowCtor
 
@@ -509,7 +511,15 @@ let result = isKnownCtor(MyClass); // true
 
 
 
+# isEmptyValue
+
+sorry, there is no documentation yet :-( 
+
 # mergeObjects
+
+sorry, there is no documentation yet :-( 
+
+# paramsToObject
 
 sorry, there is no documentation yet :-( 
 
@@ -606,10 +616,6 @@ let result = new MixedView();
 
 ````
 
-
-# paramsToObject
-
-sorry, there is no documentation yet :-( 
 
 # setByPath
 

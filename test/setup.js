@@ -13,16 +13,19 @@ global.chai = chai;
 global.sinon = sinon;
 
 if (!global.document || !global.window) {
+	
+	require('jsdom-global')();
 
-	let jsdom = require('jsdom');
-	const { JSDOM } = jsdom;
-	let dom = new JSDOM('<html><head><script></script></head><body></body></html>', {
-		FetchExternalResources: ['script'],
-		ProcessExternalResources: ['script']
-	});
-	global.window = dom.window;
-	global.document = dom.window.document;
-	global.navigator = dom.window.navigator;	
+	// let jsdom = require('jsdom');
+	// const { JSDOM } = jsdom;
+	// let dom = new JSDOM('<html><head><script></script></head><body></body></html>', {
+	// 	FetchExternalResources: ['script'],
+	// 	ProcessExternalResources: ['script']
+	// });
+	// global.window = dom.window;
+	// global.document = dom.window.document;
+	// global.navigator = dom.window.navigator;
+	// global.Element = dom.window.document.createElement()
 }
 
 const $ = require('jquery')(global.window);
