@@ -18,7 +18,7 @@ let rollupGlobals = {
 	'backbone.marionette': 'Mn',
 	'jquery': '$',
 	'underscore': '_',
-	'bbmn-core': 'bbmn'
+	'bbmn-core': 'bbmn',	
 };
 
 let testExternals = ['backbone', 'backbone.marionette', 'underscore'];

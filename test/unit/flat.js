@@ -163,6 +163,9 @@ describe('flat: ',function(){
 			it('should return undefined if traverse argument is undefined', function(){
 				expect(flat(undefined)).to.be.undefined;
 			});
+			it('should return undefined if traverse argument is missing', function(){
+				expect(flat(window)).to.be.undefined;
+			});				
 		});
 
 	});

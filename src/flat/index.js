@@ -1,12 +1,18 @@
 import _ from 'underscore';
 import { isModel } from 'bbmn-core';
 
+function isBadSource(src) {
+	if (typeof global !== 'undefined' && src === global) {
+		return true;
+	} else if (typeof window !== 'undefined' && src === window) {
+		return true;
+	}
+}
+
 export const privateApi = { 
 	traverse(source, destination = {}, root = '') {
-	
-		if (!_.isObject(source) || source === global) {
-			return;
-		}
+
+		if(isBadSource(source)) { return; }
 
 		var hash = isModel(source) ? source.attributes : source;
 
