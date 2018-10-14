@@ -30,7 +30,7 @@ export const privateApi = {
 			else if (_.isDate(prop)) {
 				destination[root + name] = new Date(prop.valueOf());
 			}
-			else if (!_.isObject(prop)) {
+			else if (!_.isObject(prop) || _.isFunction(prop)) {
 				destination[root + name] = prop;
 			}
 			else {
