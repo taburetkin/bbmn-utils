@@ -73,8 +73,12 @@ describe('flags: ', function(){
 				expect(hasFlag('one, three, Four', 'five, four')).to.be.true;
 			});
 	
-			it('should return false if some values present in check and `all` is true', function(){
+			it('should return false if some flags missing in values and `all` is true', function(){
 				expect(hasFlag('one, three, four', 'five, four', { all: true })).to.be.false;
+			});
+
+			it('should return true if all flags present in values and `all` is true', function(){
+				expect(hasFlag('one, three, four', 'one, four', { all: true })).to.be.true;
 			});
 	
 		});
@@ -178,9 +182,12 @@ describe('flags: ', function(){
 			it('should return founded values by flags set', function(){
 				expect(getFlag(stringValue, 'one, three')).to.be.equal('One, Three');
 			});
-			it('should return undefined if all set to tru and not all flags suplied', function(){
-				expect(getFlag(stringValue, 'one, three', { all: true })).to.be.undefined;
+			it('should return all flags if all set to true and all flags are present in value', function(){
+				expect(getFlag(stringValue, 'one, three', { all: true })).to.be.equal('One, Three');
 			});
+			it('should return undefined if all set to true and not all flags are present in value', function(){
+				expect(getFlag(stringValue, 'one, three, blablabla', { all: true })).to.be.undefined;
+			});			
 			it('should return undefined if caseSensitive set to true', function(){
 				expect(getFlag(stringValue, 'one, three', { caseSensitive: true })).to.be.undefined;
 			});
@@ -188,6 +195,15 @@ describe('flags: ', function(){
 	
 				expect(getFlag(stringValue, 'one', { returnAs: 'object' })).to.be.eql({'0':'One'});
 			});
+			it('should omit same flags', function(){
+				expect(getFlag(stringValue, 'one, one')).to.be.equal('One');
+			});			
+			it('should omit same values', function(){
+				expect(getFlag('one, one, two', 'one, two')).to.be.equal('one, two');
+			});	
+			it('should respect caseSensitive flag when omiting values', function(){
+				expect(getFlag('one, One, two', 'one, One', { caseSensitive: true })).to.be.equal('one, One');
+			});						
 		});
 	
 		describe('when string value and array flag', function(){
@@ -198,9 +214,12 @@ describe('flags: ', function(){
 			it('should return founded values array by flags set', function(){
 				expect(getFlag(stringValue, ['one', 'three'])).to.be.eql(['One', 'Three']);
 			});
-			it('should return undefined if all set to tru and not all flags suplied', function(){
-				expect(getFlag(stringValue, ['one', 'three'], { all: true })).to.be.undefined;
-			});		
+			it('should return all flags if all set to true and all flags are present in value', function(){
+				expect(getFlag(stringValue, ['one', 'three'], { all: true })).to.be.eql(['One', 'Three']);
+			});
+			it('should return undefined if all set to true and not all flags are present in value', function(){
+				expect(getFlag(stringValue, ['one', 'three', 'blablabla'], { all: true })).to.be.undefined;
+			});				
 		});
 		describe('when array value', function(){
 			const vakue = ['one', 'two', 'three'];

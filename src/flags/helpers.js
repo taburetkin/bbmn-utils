@@ -2,11 +2,15 @@ import _ from 'underscore';
 import isEmptyValue from '../is-empty-value/index.js';
 
 
-export function normalizeStringArray(arr){
+export function normalizeStringArray(arr, { caseSensitive } = {}){
+	const check = {};
 	return _.reduce(arr, (result, item) => {
 		
 		if (isEmptyValue(item)) { return result; }
-
+		item = item.toString();
+		let checkKey = caseSensitive ? item : item.toLowerCase();
+		if (checkKey in check) { return result; }
+		check[checkKey] = 1;
 		result.push(item.toString());
 		return result;
 
@@ -74,7 +78,7 @@ export function searchFlags(values, flags,  options)
 	let all = options.all;
 	if (
 		!result.length 
-		|| (all && result.length != values.length)
+		|| (all && result.length != flags.length)
 	) { 
 		return; 
 	}
