@@ -31,6 +31,9 @@
 * [camelCase](#camelcase) - converts `to:camel:case` string to `toCamelCase`
 
 
+* [clone](#clone) - clones given argument, by default its a deep clone with omiting functions.
+
+
 * [comparator](#comparator) - helper for **array sort**, allow to construct complex multy field compare iteratees
 
 
@@ -94,13 +97,13 @@
 * [takeFirst](#takefirst) - Takes first founded value from given objects: `takeFirst('foo', options, this)`
 
 
+* [toBool](#tobool) - Converts argument to boolean. Supports options for describing convert behavior.
+
+
 * [triggerMethod](#triggermethod) - Acts like marionette `triggerMethod`, also checks if an instance has `trigger` function.
 
 
 * [triggerMethodOn](#triggermethodon) - Acts like old marionette `triggerMethodOn`, internally uses [triggerMethod](#triggerMethod)
-
-
-* [toBool](#tobool) - Converts argument to boolean. Supports options for describing convert behavior.
 
 
 * [unflat](#unflat) - Unflats given object. `{ 'a.b': 1 }` becames `{ a: { b: 1 } }`

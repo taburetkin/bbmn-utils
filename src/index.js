@@ -48,7 +48,7 @@ import {
 	isClass, isModel, isModelClass, isCollection, isCollectionClass, isView, isViewClass
 } from 'bbmn-core';
 
-
+import clone from './clone';
 
 export {
 	VERSION,
@@ -75,6 +75,7 @@ export {
 	unflat,
 	compareObjects,
 	mergeObjects,
+	clone,
 	triggerMethod,
 	triggerMethodOn,
 	mergeOptions,
@@ -111,6 +112,7 @@ export default {
 	unflat,
 	compareObjects,
 	mergeObjects,
+	clone,
 	triggerMethod,
 	triggerMethodOn,
 	mergeOptions,

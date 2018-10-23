@@ -31,6 +31,9 @@
 * [camelCase](#camelcase) - converts `to:camel:case` string to `toCamelCase`
 
 
+* [clone](#clone) - clones given argument, by default its a deep clone with omiting functions.
+
+
 * [comparator](#comparator) - helper for **array sort**, allow to construct complex multy field compare iteratees
 
 
@@ -94,13 +97,13 @@
 * [takeFirst](#takefirst) - Takes first founded value from given objects: `takeFirst('foo', options, this)`
 
 
+* [toBool](#tobool) - Converts argument to boolean. Supports options for describing convert behavior.
+
+
 * [triggerMethod](#triggermethod) - Acts like marionette `triggerMethod`, also checks if an instance has `trigger` function.
 
 
 * [triggerMethodOn](#triggermethodon) - Acts like old marionette `triggerMethodOn`, internally uses [triggerMethod](#triggerMethod)
-
-
-* [toBool](#tobool) - Converts argument to boolean. Supports options for describing convert behavior.
 
 
 * [unflat](#unflat) - Unflats given object. `{ 'a.b': 1 }` becames `{ a: { b: 1 } }`
@@ -274,6 +277,87 @@ buildViewByKey(context, 'footer');
 ```
 
 
+# camelCase
+
+> ### camelCase(...args, boolean[optional])
+
+converts `:` separated string to `camelCase`.
+
+### returns: camelCasedString
+
+### arguments:
+each argument should be a string and the last one can be a bollean.
+
+### boolean argument:
+If last argument is `true` then first letter became capitalized.
+
+### eamples:
+````javascript
+
+camelCase('as:camel:case'); //  - "asCamelCase"
+camelCase('as:camel:case', true); // - "AsCamelCase"
+camelCase('as', 'camel', 'case', true); // - "AsCamelCase"
+
+````
+
+
+# clone
+
+Tries to clone given argument.
+Difference from `_.clone` is that by default there is a deep clone. it also accepts options as second argument.
+If given argument is object with circular references they will be removed.
+Also copied only own properties.
+
+
+### returns: 
+cloned argument
+
+### arguments:
+* **arg**: any,
+* **options**: object, optional
+> clone(myobject, options);
+
+### options:
+* **functions**: boolean, default: `false`
+> if `true`, also copies methods and omit them if `false`
+* **deep**: boolean, default: `true`
+> if `true`, creates a deep clone of a given argument, if `false` acts exactly as `_.clone`
+
+
+### examples:
+````javascript
+
+let date = new Date();
+let clonedDate = clone(date);
+console.log(date === clonedDate); // false
+
+let obj = {
+	foo:'foo',
+	bar: {
+		baz: 'baz'
+	}
+}
+let clonedObj = clone(obj);
+console.loc(clonedObj === obj); //false
+console.loc(clonedObj.bar === obj.bar); //false
+
+let clonedObj2 = clone(obj, { deep: false });
+console.loc(clonedObj2.bar === obj.bar); //true
+
+let withMethods = {
+	foo: () => {},
+	bar: 'bar'
+};
+let clonedWithoutMethods = clone(withMethods);
+console.log(_.size(clonedWithoutMethods)); // 1
+
+let clonedWithMethods = clone(withMethods, { functions: true });
+console.log(_.size(clonedWithMethods)); // 2
+console.log(clonedWithMethods.foo === withMethod.foo); // true
+
+````
+
+
 # comparator
 
 compares A and B.  
@@ -356,39 +440,15 @@ compareAB(viewA, viewB, [(model,view) => view.order, model => model.get('order')
 ````
 
 
-# camelCase
-
-> ### camelCase(...args, boolean[optional])
-
-converts `:` separated string to `camelCase`.
-
-### returns: camelCasedString
-
-### arguments:
-each argument should be a string and the last one can be a bollean.
-
-### boolean argument:
-If last argument is `true` then first letter became capitalized.
-
-### eamples:
-````javascript
-
-camelCase('as:camel:case'); //  - "asCamelCase"
-camelCase('as:camel:case', true); // - "AsCamelCase"
-camelCase('as', 'camel', 'case', true); // - "AsCamelCase"
-
-````
-
-
 # compareObjects
 
 sorry, there is no documentation yet :-( 
 
-# enums
+# convertString
 
 sorry, there is no documentation yet :-( 
 
-# convertString
+# enums
 
 sorry, there is no documentation yet :-( 
 
@@ -435,10 +495,6 @@ plain object
 ````
 
 
-# getOption
-
-sorry, there is no documentation yet :-( 
-
 # getByPath
 
 ### returns: 
@@ -462,6 +518,14 @@ result = getByPath(myObject, 'foo.bar'); // - undefined
 
 ````
 
+
+# getOption
+
+sorry, there is no documentation yet :-( 
+
+# isEmptyValue
+
+sorry, there is no documentation yet :-( 
 
 # isKnowCtor
 
@@ -508,15 +572,7 @@ let result = isKnownCtor(MyClass); // true
 
 
 
-# isEmptyValue
-
-sorry, there is no documentation yet :-( 
-
 # mergeObjects
-
-sorry, there is no documentation yet :-( 
-
-# paramsToObject
 
 sorry, there is no documentation yet :-( 
 
@@ -613,6 +669,10 @@ let result = new MixedView();
 
 ````
 
+
+# paramsToObject
+
+sorry, there is no documentation yet :-( 
 
 # setByPath
 
