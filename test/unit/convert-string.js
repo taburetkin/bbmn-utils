@@ -4,11 +4,15 @@ import converters from '../../src/convert-string/converters';
 
 describe('convertString: ', function(){
 
-	it('when type is not a string should throw error', function(){
-		expect(convertString).to.throw('type should be a string');
+	it('when type is not a string should return argument without change', function(){
+		let test = {};
+		let converted = convertString(test);
+		expect(converted).to.be.equal(test);
 	});
-	it('when type converter is not a function should throw error', function(){
-		expect(convertString.bind(null, '', 'fake')).to.throw('string converter fake is not a function');
+	it('when type converter is not a function should return argument without change', function(){
+		let test = {};
+		let converted = convertString(test, 'sometype');
+		expect(converted).to.be.equal(test);
 	});
 
 	describe('when converter exists', function(){

@@ -2,18 +2,18 @@ import _ from 'underscore';
 import converters from './converters.js';
 
 //this is under development yet and can be change in any time
-export default function convertString(text, type, opts) {
-
+export default function convertString(text, type, options) {
+	
 	if (!_.isString(type)) { 
-		throw new Error('type should be a string');
+		return text;
 	}
 
 	const converter = converters[type];
 
 	if (!_.isFunction(converter)) {
-		throw new Error(`string converter ${type} is not a function`);
+		return text;
 	}
 
-	return converter(text, opts);
+	return converter(text, options);
 	
 }
