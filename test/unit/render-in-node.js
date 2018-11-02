@@ -96,4 +96,24 @@ describe('renderInNode: ', function(){
 			expect($(selector).length).to.be.equal(0);
 		});						
 	});
+
+	describe('when defer option used', function(){
+		let $el;
+		let region;
+		let view;
+		let test;
+		beforeEach(function(){
+			$el = $('<div class="' + cssclass + '">').appendTo(document.body);
+			test = opts => {
+				view = new MyView();
+				opts.el = selector;
+				return renderInNode(view, opts);
+			};
+		});
+		it('should use defer options', function(){
+			test({ defer: true });
+			expect($el.html()).to.be.equal('');
+		});
+	});
+
 });
