@@ -44,7 +44,7 @@ function normalizeElement(selector) {
 
 const renderInNode  = function (view,  opts) {
 	let options = _.extend({}, config, opts);
-	let { el, replaceElement, destroySelfOnEmpty, destroyOnEmpty } = options;
+	let { el, replaceElement, destroySelfOnEmpty, destroyOnEmpty, defer } = options;
 
 	const NodeRegion = config.Region;
 	el = normalizeElement(el);
@@ -55,7 +55,11 @@ const renderInNode  = function (view,  opts) {
 		replaceElement = true;
 	}
 	const region = new NodeRegion({ el, replaceElement, destroySelfOnEmpty, destroyOnEmpty });
-	region.show(view);
+	if (defer) {
+		_.defer(() => region.show(view));
+	} else {
+		region.show(view);
+	}
 	return region;
 };
 
