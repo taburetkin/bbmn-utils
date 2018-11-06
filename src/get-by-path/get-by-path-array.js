@@ -1,19 +1,20 @@
 import _ from 'underscore';
 import getProperty from './get-property.js';
+import isEmptyValue from '../is-empty-value';
 
-function getByPathArray(context, propertyName, pathArray) {
+function getByPathArray(context, propertyName, pathArray, options) {
 	
-	if (context == null || !_.isObject(context) || propertyName == null || propertyName == '')
+	if (!_.isObject(context) || isEmptyValue(propertyName))
 		return;
 
-	var prop = getProperty(context, propertyName);
+	var prop = getProperty(context, propertyName, options);
 
-	if (!pathArray.length || (pathArray.length && prop == null))
+	if (!pathArray.length || prop == null)
 		return prop;
 
 	var nextName = pathArray.shift();
 
-	return getByPathArray(prop, nextName, pathArray);
+	return getByPathArray(prop, nextName, pathArray, options);
 
 }
 
