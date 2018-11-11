@@ -7,12 +7,12 @@ function pstoSetPair(context, pair, options){
 	let keyvalue = pair.split('=');
 	let key = keyvalue.shift();
 	let value = keyvalue.join('=');
-	pstoSetKeyValue(context, key, value, options);
+	return pstoSetKeyValue(context, key, value, options);
 }
 
 function pstoSetKeyValue(context, key, value, options){
 		
-	if (isEmptyValue(key) || isEmptyValue(value)) return;
+	if (isEmptyValue(key)) return;
 
 	key = decodeURIComponent(key);
 	value = decodeURIComponent(value);
@@ -22,31 +22,36 @@ function pstoSetKeyValue(context, key, value, options){
 		value = transform(key, value, options);
 	}
 
-	if(!(key in context)) {
+	if (isEmptyValue(value)) return;
+
+	if (key in context) {
+		if(!_.isArray(context[key])) {
+			context[key] = [context[key]];
+		}
+		context[key].push(value);
+	} else {
 		context[key] = value;
-		return value;
 	}
-
-	if (!_.isArray(context[key])) {
-		context[key] = [context[key]];
-	}
-
-	context[key].push(value);
-
-	return context[key];
+	return { key, value };
 }
 
 export default function paramsToObject(raw, options = {}) {
 	let emptyObject = options.emptyObject !== false;
 	let result = {};
-	if(!_.isString(raw)) return emptyObject ? result : raw;
+	if(!_.isString(raw)) return emptyObject ? result : undefined;
 
-	let pairs = raw.split('&');
-	_(pairs).each((pair) => pstoSetPair(result, pair, options));
+	let rawpairs = raw.split('&');
+	let pairs = _(rawpairs).reduce((memo, rawpair) => {
+		let pair = pstoSetPair(result, rawpair, options);
+		if (pair != null) {
+			memo.push(pair);
+		}
+		return memo;
+	}, []);
 	
 	if (!_.size(result) && !emptyObject) {
-		return raw;
+		return;
 	}
 
-	return result;
+	return !options.asArray ? result : pairs;
 }

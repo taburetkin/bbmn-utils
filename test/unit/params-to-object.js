@@ -2,8 +2,8 @@ import '../setup';
 import { paramsToObject } from '../../src';
 
 describe('params-to-object', function(){
-	it('should return given value if its not a string and emptyObject option is set to false', function(){
-		expect(paramsToObject(123, { emptyObject: false })).to.be.equal(123);
+	it('should return undefined if its not a string and emptyObject option is set to false', function(){
+		expect(paramsToObject(123, { emptyObject: false })).to.be.undefined;
 	});
 	it('should return empty object if its not a string and emptyObject option is set to true', function(){
 		expect(paramsToObject(123, { emptyObject: true })).to.be.eql({});
@@ -14,16 +14,26 @@ describe('params-to-object', function(){
 	it('should return empty object if given string is empty', function(){
 		expect(paramsToObject('')).to.be.eql({});
 	});
-	it('should return empty string if given string is empty and emptyObject is set to false', function(){
-		expect(paramsToObject('', { emptyObject: false })).to.be.equal('');
+	it('should return undefined if given string is empty and emptyObject is set to false', function(){
+		expect(paramsToObject('', { emptyObject: false })).to.be.undefined;
 	});
 	it('should return empty object if given string does not contain any valued keys', function(){
 		expect(paramsToObject('key1=&key2=&=bar')).to.be.eql({});
 	});
-	it('should return given string if it does not contain any valued keys and emptyObject is set to false', function(){
+	it('should return undefined if it does not contain any valued keys and emptyObject is set to false', function(){
 		let str = 'key1=&key2=';
-		expect(paramsToObject(str, { emptyObject: false })).to.be.eql(str);
+		expect(paramsToObject(str, { emptyObject: false })).to.be.undefined;
 	});
+	it('should return array if asArray option passed', function(){
+		let str = 'key1=asd&key2=asd';
+		expect(paramsToObject(str, { asArray: true })).to.be.an('array');
+	});	
+
+	// it.only('test case', function(){
+	// 	let str = 'key.x=asd&key[1].y=asd';
+	// 	let result = paramsToObject(str);
+	// 	console.log(result);
+	// });
 
 	describe('when string is valid', function(){
 		let str = 'foo=foo&bar=bar&bar=bar2&bar=bar3';
@@ -51,5 +61,6 @@ describe('params-to-object', function(){
 			expect(spyTransform).to.have.callCount(4);
 		});
 	});
+
 
 });
