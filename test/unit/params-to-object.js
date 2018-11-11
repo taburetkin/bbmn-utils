@@ -1,7 +1,7 @@
 import '../setup';
 import { paramsToObject } from '../../src';
 
-describe('params-to-object', function(){
+describe('paramsToObject: ', function(){
 	it('should return undefined if its not a string and emptyObject option is set to false', function(){
 		expect(paramsToObject(123, { emptyObject: false })).to.be.undefined;
 	});
@@ -62,5 +62,47 @@ describe('params-to-object', function(){
 		});
 	});
 
+	describe('when complex option is passed', function(){
+		let str = '';
+		const test = _.partial(paramsToObject, _, { complex: true });
+
+		it('should return simple keys as usual paramsToObject', function(){
+			str = 'zxc=1&asd=2&qwe=3';
+			expect(test(str)).to.be.eql({zxc:'1',asd:'2',qwe:'3'});
+		});
+
+		it('should respect key tokens and return mixed objects instead of raw values', function(){
+			str = 'test.foo=foo&test.bar=bar';
+			expect(test(str)).to.be.eql({test:{ foo: 'foo', bar: 'bar' }});
+		});
+
+		it('should respect key indexes and return mixed arays instead of raw values', function(){
+			str = 'test=foo&test[3]=bar&test[2]=baz';
+			expect(test(str)).to.be.eql({test:['foo', undefined, 'baz', 'bar']});
+		});
+
+		it('should place similar key values to array', function(){
+			str = 'test=foo&test=bar&test=baz';
+			expect(test(str)).to.be.eql({test:['foo', 'bar', 'baz']});
+		});
+
+		it('should respect missed indexes', function(){
+			str = 't.v=foo&t.v=bar&t[0].v=baz';
+			expect(test(str)).to.be.eql({t:[{v:'baz'}, {v:'bar'}]});
+		});
+		it('should respect indexes', function(){
+			str = 't[0].v=foo&t[1].v=bar&t[2].v=baz';
+			expect(test(str)).to.be.eql({t:[{v:'foo'}, {v:'bar'}, {v:'baz'}]});
+			expect(test('t[1]=foo')).to.be.eql({t:[undefined, 'foo']});
+		});			
+		it('should extend last value if there is no index and token not filled yet', function(){
+			str = 't.v=foo&t.v=next&t.b=bar&t[1].v=last';
+			expect(test(str)).to.be.eql({t: [ {v:'foo'}, {v:'last', b:'bar'}] });
+		});
+		it('should add new array item if there is no index and token already filled', function(){
+			str = 't.v=foo&t.v=next&t.b=bar&t.v=last';
+			expect(test(str)).to.be.eql({t: [ {v:'foo'}, {v:'next', b:'bar'}, {v:'last'}] });
+		});		
+	});
 
 });
