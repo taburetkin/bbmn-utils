@@ -1,5 +1,7 @@
 import _ from 'underscore';
+import flat from '../flat';
 
+/*
 function check(arg, opts) {
 	opts.ob += _.isObject(arg) && 1 || 0;
 	opts.ar += _.isArray(arg) && 1 || 0;
@@ -15,23 +17,51 @@ function checkArguments(a,b)
 	return [chck.sum, chck.ob, chck.fn, chck.ar];
 }
 
-export default function compareObjects(objectA, objectB) {
-	let [sum, ...vals] = checkArguments(objectA, objectB);
-	if (sum === 0) {
-		return objectA == objectB;
+*/
+
+
+function getType(arg) {
+	if(_.isFunction(arg)){
+		return 8;
+	} else if(_.isArray(arg)) {
+		return 4;
+	} else if(_.isObject(arg)){
+		return 2;
+	} else {
+		return 1;
 	}
-	if(!_.every(vals, val => val % 2 === 0)) {
+}
+function sameType(a,b){
+	let at = getType(a);
+	let bt = getType(b);
+	return at == bt && at != 8 ? at : false;
+}
+export default function compareObjects(objectA, objectB) {
+
+	if (objectA == objectB) {
+		return true;
+	}
+	let type = sameType(objectA, objectB);
+	if (!type) {
 		return false;
 	}
+	else if (type == 1){
+		return objectA == objectB;
+	}
+
+	objectA = flat(objectA);
+	objectB = flat(objectB);
 
 	let size = _.size(objectA);
-	if (size != _.size(objectB)) { return false; }
+	if (size != _.size(objectB)) { 
+		return false; 
+	}
 
 	if (_.isArray(objectA)) {
 		let allvalues = _.uniq(objectA.concat(objectB));
 		return _.every(allvalues, value => {
-			let valuesA = _.filter(objectA, _v => compareObjects(_v,value));
-			let valuesB = _.filter(objectB, _v => compareObjects(_v,value));
+			let valuesA = _.filter(objectA, _v => compareObjects(_v, value));
+			let valuesB = _.filter(objectB, _v => compareObjects(_v, value));
 			if (valuesA.length != valuesB.length) return false;
 			return compareObjects(valuesA[0], valuesB[0]);
 		});

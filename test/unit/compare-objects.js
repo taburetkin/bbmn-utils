@@ -1,5 +1,6 @@
 import '../setup';
-import { compareObjects } from '../../src';
+import { compareObjects, flat } from '../../src';
+import { Model } from 'bbmn-core';
 
 describe('compareObjects', function(){
 	it('when arguments are not objects should apply strict equal', function(){
@@ -12,10 +13,13 @@ describe('compareObjects', function(){
 		expect(compareObjects([],{})).to.be.false;
 	});
 	it('when objects keys do not match should return false', function(){
-		expect(compareObjects({},{ a: undefined })).to.be.false;		
+		expect(compareObjects({},{ a: 1 })).to.be.false;		
 	});
+	it('when there is no actual values should return true', function(){
+		expect(compareObjects({},{ a: undefined })).to.be.true;		
+	});	
 	it('when objects keys and values mathced should return true', function(){
-		expect(compareObjects(() => {}, () => {})).to.be.true;
+		expect(compareObjects(() => {}, () => {})).to.be.false;
 		expect(compareObjects({ a: 'foo', b:'bar' },{ b: 'bar', a:'foo' })).to.be.true;	
 		expect(compareObjects({ b:123 },{ a: 123 })).to.be.false;
 	});	
@@ -62,5 +66,21 @@ describe('compareObjects', function(){
 			b: 2
 		}
 		expect(compareObjects(a, b)).to.be.false;
+	});
+	it('when comparing same object', function(){
+		let test = {a:1, b: { b:2 } };
+		expect(compareObjects(test, test)).to.be.true;
+	});
+	it('when comparing backbone models', function(){
+		let a = new Model({id:1});
+		let b = new Model();
+		expect(compareObjects(a, b)).to.be.false;
 	});	
+	it('when comparing objects with circular references', function(){
+		let a = {a:1, b: { b:2 } };
+		let b = {a:1, b: { b:2 } };
+		a.c = b;
+		b.c = a;
+		expect(compareObjects(a, b)).to.be.true;
+	});		
 });

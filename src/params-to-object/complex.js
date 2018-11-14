@@ -17,7 +17,7 @@ function parseKey(raw){
 		property: rest.split('.').shift() || undefined,
 		index,
 		notIndexed: index === false
-	}
+	};
 }
 
 function buildKeyPath(k){

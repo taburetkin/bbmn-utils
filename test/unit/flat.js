@@ -120,7 +120,14 @@ describe('flat: ',function(){
 			});
 
 		});	
-
+		describe('when traverse argument is function or array', function(){
+			it('should not flat argument', function(){
+				let arr = [1,2,3];
+				let fn = () => {};
+				expect(flat(arr)).to.be.equal(arr);
+				expect(flat(fn)).to.be.equal(fn);
+			});
+		});
 		describe('when traverse argument is a Backbone.Model', function(){
 			const model = new Model({
 				foo:'foo',
@@ -166,6 +173,17 @@ describe('flat: ',function(){
 			it('should return undefined if traverse argument is missing', function(){
 				expect(flat(window)).to.be.undefined;
 			});				
+		});
+
+		describe('when has circular references', function(){
+			it('should omit circular references', function(){
+				let test = { a: 1, b:{ c: 2 } };
+				test.b.opa = test;
+				expect(flat(test)).to.be.eql({
+					a:1,
+					'b.c':2,					
+				});
+			});
 		});
 
 	});
