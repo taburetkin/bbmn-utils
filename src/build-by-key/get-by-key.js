@@ -13,7 +13,7 @@ function shouldInvoke(instance, ctor, checkCtor) {
 	return _.isFunction(instance) && !isCtor(instance, ctor, checkCtor);
 }
 
-export default function getByKey(context, key, { ctor, checkCtor, options } = {}){
+export default function getByKey(context, key, { ctor, checkCtor, options, defaultOptions } = {}){
 	
 	if(!_.isString(key)) { return; }
 	
@@ -26,7 +26,7 @@ export default function getByKey(context, key, { ctor, checkCtor, options } = {}
 	}
 
 	let contextOptions = getOption(context, key + 'Options', { args: [ context ] });
-	let compiledOptions = _.extend({}, contextOptions, options);
+	let compiledOptions = _.extend({}, defaultOptions, contextOptions, options);
 
 
 	if(_.isFunction(instance)) {

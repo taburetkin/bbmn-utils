@@ -4,8 +4,9 @@ import { isViewClass } from 'bbmn-core';
 
 
 
-export default function buildViewByKey(context, key, { TextView, options } = {}){
+export default function buildViewByKey(context, key, { TextView, defaultOptions, options } = {}){
 	let getOptions = {
+		defaultOptions,
 		options,
 		checkCtor: (ctor) => isViewClass(ctor)
 	};
