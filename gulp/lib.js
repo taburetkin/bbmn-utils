@@ -77,3 +77,11 @@ export function rollupForTest(name)
 gulp.task('lib-iife', () => lib('iife'));
 gulp.task('lib-umd', ['lib-iife'], () => lib('umd'));
 gulp.task('lib', ['lib-umd'], () => lib('es'));
+
+gulp.task('lib-test', ['lib-iife'], function(){
+	gulp.src('lib/iife/**/*')
+	.pipe(gulp.dest('../bbmn-test/js/utils'));
+});
+gulp.task('watch', function(){
+	gulp.watch('src/**/*', ['lib-test']);
+});

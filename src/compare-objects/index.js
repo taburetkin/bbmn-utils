@@ -1,6 +1,6 @@
 import _ from 'underscore';
 import flat from '../flat';
-
+import isEmptyValue from '../is-empty-value';
 /*
 function check(arg, opts) {
 	opts.ob += _.isObject(arg) && 1 || 0;
@@ -37,7 +37,9 @@ function sameType(a,b){
 	return at == bt && at != 8 ? at : false;
 }
 export default function compareObjects(objectA, objectB) {
-
+	if(isEmptyValue(objectA) && !isEmptyValue(objectB)){
+		return false;
+	}
 	if (objectA == objectB) {
 		return true;
 	}

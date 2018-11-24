@@ -6,6 +6,7 @@ describe('compareObjects', function(){
 	it('when arguments are not objects should apply strict equal', function(){
 		expect(compareObjects(1,2)).to.be.false;
 		expect(compareObjects('abc','abc')).to.be.true;
+		expect(compareObjects('',0)).to.be.false;
 	});
 	
 	it('when arguments are of different types should return false', function(){
