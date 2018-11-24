@@ -3,10 +3,25 @@ import { compareObjects, flat } from '../../src';
 import { Model } from 'bbmn-core';
 
 describe('compareObjects', function(){
-	it('when arguments are not objects should apply strict equal', function(){
+	it('when arguments are not objects should apply not strict equal', function(){
 		expect(compareObjects(1,2)).to.be.false;
 		expect(compareObjects('abc','abc')).to.be.true;
+		expect(compareObjects('1',1)).to.be.true;
+	});
+	it('when arguments are not objects treat empty string as not equal zero', function(){
 		expect(compareObjects('',0)).to.be.false;
+		expect(compareObjects(0,'')).to.be.false;
+	});
+	it('when arguments are not objects treat empty string as not equal any nullable value', function(){
+		expect(compareObjects('',null)).to.be.false;
+		expect(compareObjects(null, '')).to.be.false;
+		expect(compareObjects('',undefined)).to.be.false;
+		expect(compareObjects(undefined, '')).to.be.false;
+	});
+
+	it('when arguments are null they are equal', function(){
+		expect(compareObjects(null, undefined)).to.be.true;
+		expect(compareObjects(undefined, null)).to.be.true;
 	});
 	
 	it('when arguments are of different types should return false', function(){

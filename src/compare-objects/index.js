@@ -37,12 +37,20 @@ function sameType(a,b){
 	return at == bt && at != 8 ? at : false;
 }
 export default function compareObjects(objectA, objectB) {
-	if(isEmptyValue(objectA) && !isEmptyValue(objectB)){
-		return false;
+
+	if (objectA == null && objectB == null) {
+		return objectA == objectB;
 	}
+
+	if (objectA === '' || objectB === '') {
+		return objectA === objectB;
+	}
+
+
 	if (objectA == objectB) {
 		return true;
 	}
+
 	let type = sameType(objectA, objectB);
 	if (!type) {
 		return false;
