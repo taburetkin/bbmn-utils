@@ -13,7 +13,7 @@ function shouldInvoke(instance, ctor, checkCtor) {
 	return _.isFunction(instance) && !isCtor(instance, ctor, checkCtor);
 }
 
-export default function getByKey(context, key, { ctor, checkCtor, options, defaultOptions } = {}){
+export default function getByKey(context, key, { ctor, checkCtor, options, defaultOptions, invokeContext, invokeArguments } = {}){
 	
 	if(!_.isString(key)) { return; }
 	
@@ -21,11 +21,16 @@ export default function getByKey(context, key, { ctor, checkCtor, options, defau
 	if (instance == null) {
 		return;
 	}
+	!invokeContext && (invokeContext = context);
+	!invokeArguments && (invokeArguments = [context]);
 	if (shouldInvoke(instance, ctor, checkCtor)) {
-		instance = instance.call(context, context);
+		instance = instance.apply(invokeContext, invokeArguments);
 	}
 
-	let contextOptions = getOption(context, key + 'Options', { args: [ context ] });
+	let contextOptions = getOption(context, key + 'Options', { force: false, args: [ context ] });
+	if (_.isFunction(contextOptions)) {
+		contextOptions = contextOptions.apply(invokeContext, invokeArguments);
+	}
 	let compiledOptions = _.extend({}, defaultOptions, contextOptions, options);
 
 

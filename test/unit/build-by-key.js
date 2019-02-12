@@ -45,8 +45,29 @@ describe('buildByKey: ', function(){
 					numKey: () => 123,					
 				},
 				key: MnObject,
-				keyOptions: testOptions
+				keyOptions: testOptions,
 			}
+		});
+
+		it('should invoke property with given invokeContext and invokeArguments', function(){
+			const invokeContext = {
+				d: 4
+			};
+			const invokeArguments = [1,2,3];
+			const anotherContext = {
+				key(a,b,c){
+					return a + b + c + this.d;
+				},
+				keyOptions(a,b,c){
+					if (a + b + c + this.d === 10) {
+						return invokeContext;
+					}
+				}
+			}
+			let result = getByKey(anotherContext, 'key', { invokeContext, invokeArguments });
+
+			expect(result).to.have.property('value', 10);
+			expect(result).to.have.deep.property('options', { d:4 });
 		});
 
 		it('should return undefined if key is not a string', function(){
