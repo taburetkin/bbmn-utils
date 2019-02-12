@@ -162,4 +162,22 @@ describe('buildByKey: ', function(){
 		let result = buildByKey(context, 'obj', { ctor: Fn });
 		expect(result).to.be.undefined;
 	});	
+	it('should build with given invokeContext and invokeArguments', function(){
+		const origin = {
+			model: new (function(){ this.value = 'baz' }),
+			text: 'foo bar',
+			deep: {
+				item: (model, view) => MnObject.extend({ model, view }),
+				itemOptions: (model, view) => ({
+					text: view.text,
+					value: model.value,
+				})
+			}
+		};
+		const builded = buildByKey(origin.deep, 'item', { invokeContext: origin, invokeArguments: [origin.model, origin] });
+		expect(builded.model).to.be.equal(origin.model);
+		expect(builded.view).to.be.equal(origin);
+		expect(builded.options.text).to.be.equal(origin.text);
+		expect(builded.options.value).to.be.equal(origin.model.value);
+	});
 });
